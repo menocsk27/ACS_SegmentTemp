@@ -1,0 +1,56 @@
+body {
+  overflow-x: hidden;
+}
+.backButton {
+  position: fixed;
+  left: 5px;
+  top: 10px;
+}
+.addButton {
+  position: fixed;
+  left: 92%;
+  top: 87%;
+}
+#withIngredients {
+  display: none;
+}
+#withoutIngredients {
+  display: none;
+}
+.backgroundModal {
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  display: none;
+  background-color: #1B1B1B;
+  opacity: 0.8;
+}
+.customModal {
+  position: fixed;
+  height: 60%;
+  width: 45%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  z-index: 9999;
+  border-radius: 10px;
+  border-color: #D5D6D8;
+  display: none;
+}
+.customModalAdmin {
+  position: fixed;
+  height: 73%;
+  width: 45%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  z-index: 9999;
+  border-radius: 10px;
+  border-color: #D5D6D8;
+  display: none;
+}
+.scrolling {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

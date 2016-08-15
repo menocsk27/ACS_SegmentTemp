@@ -1,0 +1,58 @@
+body {
+  overflow-y: auto;
+}
+
+.upperLeftCorner {
+    position: fixed;
+    left: 2%;
+    top: 3%;
+}
+
+.backgroundModal {
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  display: none;
+  background-color: #1B1B1B;
+  opacity: 0.8;
+}
+
+.recipeModal {    
+  position: fixed;
+  height: 60%;
+  width: 45%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  z-index: 9999;
+  border-radius: 10px;
+  border-color: #D5D6D8;
+  display: none;
+  left: 27.5%;
+  top: 20%;   
+}
+
+.scrolling {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.NoDishes {
+  top: 40%;
+  position: absolute;
+  left: 18%;
+  right: 38%;
+}
+
+.Cart {
+  overflow-y: auto;
+  height: 450px;
+}
+
+.ui.avatar.image{
+  border-left: 5px solid;
+  border-bottom: 4px solid;
+  border-top: 4px solid;
+}
