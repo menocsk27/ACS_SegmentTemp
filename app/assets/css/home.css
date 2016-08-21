@@ -51,3 +51,9 @@ body {
   bottom: 10%;
   right: 1%;
 }
+
+.videoDiv{
+  position:absolute;
+  left:10%;
+  top:10%;
+}
