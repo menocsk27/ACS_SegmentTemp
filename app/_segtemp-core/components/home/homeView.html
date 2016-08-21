@@ -1,8 +1,10 @@
 <div class="homeDiv">
-  <div class="ui inverted fixed icon menu right">    
-    
-    <div class="item ui dropdown config right"> <i class="big icon fa fa-users"></i>
-      <div class="ui right menu">
+  <div class="ui inverted vertical fixed icon menu">    
+    <!-- Configuración y documentación --> 
+    <div class="ui left inverted pointing dropdown link item config">
+      <i class="big icon user"></i>
+      
+      <div class="ui menu">
         <div class="header">Documentación </div>
         <a class="item" href="" target="_blank"> Link de la documentación </a>
         <div class="header">Profesor</div>
@@ -12,9 +14,19 @@
         <a class="item" href="https://www.facebook.com/menoc.sk27"> Julián Méndez </a>
         <a class="item" href="https://www.facebook.com/daniel.troyo.1"> Daniel Troyo </a>
       </div>
-    </div>
-  </div>
 
-  <div class="ui icon infoIcon"> <i class="big icon fa fa-info-circle"></i></div>
+    </div>
+
+    <div id="uploadVideoDiv" class="item ui uploadIcon down"> 
+      <i class="big icon upload"></i>  
+    </div>
+
+  
+    <div ng-show="false">
+      <input type="file" id="selectVideoInput" name="file" ngf-select="uploadVideo($file, $invalidFiles)" accept="image/*"/>
+    </div>
+
+  </div>
+  <div class="ui icon infoIcon" data-position="top left" data-inverted=""> <i class="big icon info circle"></i></div>
 
 </div>

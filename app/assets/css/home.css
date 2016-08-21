@@ -27,12 +27,7 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
 }
-.Restaurants {
-  top: 20%;
-  position: absolute;
-  width: 60%;
-  left: 20%;
-}
+
 .caret.right {
   border-left: 5px solid;
   border-bottom: 4px solid transparent;
@@ -53,6 +48,6 @@ body {
 }
 .infoIcon {
   position: absolute;
-  bottom: 3%;
-  left: 1%;
+  bottom: 10%;
+  right: 1%;
 }
