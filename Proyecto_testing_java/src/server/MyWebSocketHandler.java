@@ -33,7 +33,8 @@ public class MyWebSocketHandler {
     
     @OnWebSocketMessage
     public void onMessage(String message) {
-    	HelloCV.prueba(message);
+    	HelloCV.validate(message);
         System.out.println("Message: " + message);
+        System.out.println("Histogramas creados en localhost");
     }
 }
