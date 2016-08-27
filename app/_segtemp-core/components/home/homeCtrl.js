@@ -1,25 +1,23 @@
 app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location', function($scope, $http, Upload, $timeout, $location) {
 
-  $scope.currentVideo = '/app/assets/temp/aw ye.jpg';
-  $scope.videoToUpload = '';
-
   $scope.uploadVideo = function(file){
     if (file) {
       file.upload = Upload.upload({ url: '_segtemp-core/components/general/upload.php', data: { file: file } });
 
       if ("WebSocket" in window){
-               console.log("Se puede intentar la conexión con el software.")
-               
-               // Let us open a web socket
-
-               var ws = new WebSocket("ws://localhost:9090");   //Si se pone algo despues del puerto/ se manda como mensaje que recibe java, aun no dice que la conexion esta hecha bien
+               var ws = new WebSocket("ws://localhost:9090/");   //Si se pone algo despues del 8080/ se manda como mensaje que recibe java, aun no dice que la conexion esta hecha bien
         
                ws.onopen = function(){
-                  console.log("Se logro la conexión con el servidor.");
-                  ws.send("direccion al video");
+                  alert("Se logro la conexión con el servidor.");
+                  var videoDirection = document.getElementById('selectVideoInput').value;
+                  var nameStart = (videoDirection.indexOf('\\') >= 0 ? videoDirection.lastIndexOf('\\') : videoDirection.lastIndexOf('/'));
+                  var filename = videoDirection.substring(nameStart+1);
+                  alert(filename);
+                  ws.send('C:/wamp64/www/app/assets/temp/' + filename);
                };
                ws.onmessage = function (evt){ 
                   var msg_recibido = evt.data;
+                  //Aqui se mandaria la direccion con los nuevos videos.
                   alert("Mensaje recibido: " + msg_recibido);
                };       
                ws.onclose = function(){ 
