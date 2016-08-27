@@ -1,55 +1,65 @@
 package server;
 
-import java.io.*;
 import java.net.*;
-import java.util.Date;
+import java.io.*;
 
-public class Server extends Thread{
-	public ServerSocket listener;
-	//private Socket receiver;
-	private final String CODIFICACION = "UTF-8";
-	
-	public Server () throws IOException{
-		listener = new ServerSocket(9090);
-		listener.setSoTimeout(10000);
-	}
-	public void run(){
-        try {
-            while (true) {
-            	System.out.println("Se espera un mensaje.");
-                Socket receiver = listener.accept();
-                System.out.println("Just connected to " + receiver.getRemoteSocketAddress());
-                try {
-                	BufferedReader in =
-                            new BufferedReader(new InputStreamReader(receiver.getInputStream(), CODIFICACION));
-                    
-                    PrintWriter outD =
-                        new PrintWriter(receiver.getOutputStream(), true);
-                    outD.println(new Date().toString());
-                    
-                    DataOutputStream out = new DataOutputStream(receiver.getOutputStream());
-                    out.writeUTF("Thank you for connecting to " + receiver.getLocalSocketAddress() + "\nGoodbye!");
-                    System.out.println(in.readLine());
-                    
-                    receiver.close();
-                } finally {
-                    //socket.close();
+public class Server {
+	private static Socket socket;
+	 
+    public static void main(String[] args)
+    {
+        try
+        {
+ 
+            int port = 9090;
+            ServerSocket serverSocket = new ServerSocket(port);
+            System.out.println("Server Started and listening to the port " + port);
+ 
+            //Server is running always. This is done using this while(true) loop
+            while(true)
+            {
+                //Reading the message from the client
+                socket = serverSocket.accept();
+                InputStream is = socket.getInputStream();
+                InputStreamReader isr = new InputStreamReader(is);
+                BufferedReader br = new BufferedReader(isr);
+                String number = br.readLine();
+                System.out.println("Message received from client is: "+number);
+                //Multiplying the number by 2 and forming the return message
+                String returnMessage;
+                try
+                {
+                    String numberInIntFormat = number;
+                    String returnValue = numberInIntFormat;
+                    returnMessage = String.valueOf(returnValue) + "\n";
                 }
-
-                //listener.close();
+                catch(NumberFormatException e)
+                {
+                    //Input was not a number. Sending proper message back to client.
+                    returnMessage = "Please send a proper number\n";
+                }
+ 
+                //Sending the response back to the client.
+                OutputStream os = socket.getOutputStream();
+                OutputStreamWriter osw = new OutputStreamWriter(os);
+                BufferedWriter bw = new BufferedWriter(osw);
+                bw.write(returnMessage);
+                System.out.println("Message sent to the client is HELLO.");
+                bw.flush();
             }
-        }catch(SocketTimeoutException s){
-        	System.out.println("Socket timeout.");
-        }catch(IOException e){
-        	e.printStackTrace();
+        }
+        catch (Exception e)
+        {
+        	
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                socket.close();
+            }
+            catch(Exception e){}
         }
     }
-	public static void main(String [] args){
-		try{
-			Thread t = new Server();
-	        t.start();
-	    } catch(IOException e){
-	    	e.printStackTrace();
-	    }
-	}
 }
