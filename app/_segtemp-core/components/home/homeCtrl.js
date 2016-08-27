@@ -15,7 +15,8 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
                var ws = new WebSocket("ws://localhost:9090");   //Si se pone algo despues del puerto/ se manda como mensaje que recibe java, aun no dice que la conexion esta hecha bien
         
                ws.onopen = function(){
-                  console.log("Se logro la conexión...");
+                  console.log("Se logro la conexión con el servidor.");
+                  ws.send("direccion al video");
                };
                ws.onmessage = function (evt){ 
                   var msg_recibido = evt.data;
