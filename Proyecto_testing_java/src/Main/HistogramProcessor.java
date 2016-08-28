@@ -1,3 +1,4 @@
+package Main;
 import java.util.LinkedList;
 
 import org.opencv.core.Core;

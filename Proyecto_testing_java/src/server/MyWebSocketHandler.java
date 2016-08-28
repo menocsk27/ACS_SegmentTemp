@@ -1,5 +1,6 @@
 package server;
 
+import Main.*;
 import java.io.IOException;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
@@ -9,7 +10,7 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 
 @WebSocket
-public class WebSocketHandler {
+public class MyWebSocketHandler {
 	@OnWebSocketClose
     public void onClose(int statusCode, String reason) {
         System.out.println("Close: statusCode=" + statusCode + ", reason=" + reason);
@@ -32,6 +33,7 @@ public class WebSocketHandler {
     
     @OnWebSocketMessage
     public void onMessage(String message) {
+    	HelloCV.prueba(message);
         System.out.println("Message: " + message);
     }
 }
