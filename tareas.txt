@@ -1,0 +1,80 @@
+
+
+
+
+
+
+Web
+	-Investigación del Framework Web MVC Angular.
+	-Diseño parcial de la interfaz gráfica. 
+	-Investigación del desarrollo web.
+	-Investigación del envío de archivos multimedia hacia un programa java ejecutado en el servidor.
+	-Investigación de envío de archivos desde un programa de java hacia una aplicación web.
+	-Implementación de la página web.
+	-Configuración del servidor web y de demás configuraciones necesarias para levantar la aplicación web.
+
+
+Control de versión
+	-Selección de herramienta gráfica de control de versiones.
+	-Selección de sistema de control de versiones.
+	-Configuración de herramienta gráfica de control de versiones en cada terminal de trabajo.
+	-Creación y configuración del repositorio.
+
+
+OpenCV-Java
+	-Investigación acerca de OpenCV y su utilización con JAVA.
+	-Instalación de la librería OpenCV.
+	-Configuración del entorno de desarrollo Eclipse con OpenCV.
+	-Investigación general del objetivo del proyecto y su facilidad con OpenCV y -Java.
+	-Implementación del algoritmo para leer y manipular un archivo de video local mediante la librería de OpenCV.
+	-Implementación del algoritmo de segmentación de un video en frames unitarios u objetos mediante la librería de OpenCV.
+	-Implementación del algoritmo de cambio a modelo de color HSV. 
+
+	-Investigación de Junit y sus ventajas en este proyecto.
+	-Investigación de la utilización de JUnit en el entorno de desarrollo Eclipse.
+	-Investigación de la realización de pruebas unitarias de JUnit para funciones relacionadas a OpenCV.
+	-Realización de pruebas unitarias de JUnit para el proyecto.
+	-Implementación de las pruebas de JUnit en el proyecto.
+
+
+UML
+	-Selección de una herramienta de diseño de diagramas UML.
+	-Obtención e instalación de la herramienta de diseño seleccionada.
+	-Configuración de la herramienta de diseño.
+	-Diseño del diagrama parcial de clases UML del front-end del sistema en la herramienta de diseño.
+	-Diseño del diagrama parcial de clases UML del back-end del sistema en la herramienta de diseño.
+	-Agrupación de algoritmos y funcionalidades en clases dentro de los diagramas realizados.
+	-Selección e implementación al diseño de al menos un patrón de diseño en la versión final del diseño.
+
+
+
+Requerimientos
+	Obtención de requerimien
+
+
+Análisis código estático
+	-Investigación de herramientas de análisis de código estático JAVA.
+	-Selección de la herramienta de análisis de código estático que más convenga para el proyecto.
+	-Obtención, instalación y configuración con el entorno de desarrollo Eclipse.
+
+
+Zoho-SCRUM
+	-Comprensión rigurosa de la metodología SCRUM.
+	-Analizar la implementación de SCRUM con la herramienta ZOHO.
+	-Configuración del proyecto en ZOHO.
+	-Asignación de tareas.
+	-Elaboración del documento del PoC.
+
+
+
+La distancia se normaliza utilizando la función db. Atención al proyecto 01, donde se hace la comparación de histogramas también. La sumatoria dará más alta si son parecidos. Una vez calculado esto, se obtiene un arreglo g[t-1] donde t es el número de frames. Cada elemento de g[t-1] será el resultado de la distancia de Bhattacharyya entre h(t-1) y h(t). 
+
+Al encontrar un corte habrá un cambio brusco de la distancia de Bhattacharyya entre dos histogramas, para encontrar el umbral para definir si un cambio de dicha distancia es un corte o no se debe definir un umbral. Este umbral es definido POR LA PROPIEDAD DE LOS TRES SIGMAS.  Esto quiere decir que si g(t) es mayor o igual a la suma del promedio y la varianza, SERÁ UN CORTE. 
+
+Una función de densidad gaussiana tiene como parámetros la media y la varianza. Eso es un modelo paramétrico, al igual que un histograma, que tiene parámetros. Recordar PROBA para normalizar. Aunque OpenCV realiza todos estos procedimientos. La distancia de Bhattacharyya sí hay que programarla STEP BY STEP. 
+
+
+
+La funcionalidad extra del proyecto consiste en la funcionalidad de la segmentación temporal manual del video, mostrándole al usuario la lista de frames con una etiqueta cada una y que este pueda determinar los cortes entre los frames. Esto sería algo a definir en la interfaz web la página. Dicha selección generaría un archivo yaml o json que pasaría al backend del proyecto.
+
+

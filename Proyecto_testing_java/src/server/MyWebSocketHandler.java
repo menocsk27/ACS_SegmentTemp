@@ -11,6 +11,10 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 
 @WebSocket
 public class MyWebSocketHandler {
+	
+	private MainProcessor observer = new MainProcessor();
+	
+	
 	@OnWebSocketClose
     public void onClose(int statusCode, String reason) {
         System.out.println("Close: statusCode=" + statusCode + ", reason=" + reason);
@@ -33,8 +37,15 @@ public class MyWebSocketHandler {
     
     @OnWebSocketMessage
     public void onMessage(String message) {
-    	HelloCV.validate(message);
+    	notify(message);
         System.out.println("Message: " + message);
         System.out.println("Histogramas creados en localhost");
+    }
+    
+    
+    private void notify(String message){
+    	
+    	observer.validate(message);
+    	
     }
 }

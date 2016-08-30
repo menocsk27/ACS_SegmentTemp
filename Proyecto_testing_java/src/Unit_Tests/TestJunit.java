@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import Main.HelloCV;
+import Main.MainProcessor;
 
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
@@ -18,12 +18,12 @@ import static org.junit.Assert.assertEquals;
 
 public class TestJunit {
    private String videoRoute;
-   private HelloCV testJunit;
+   private MainProcessor testJunit;
    private Boolean expectedResult;
    
    @Before
    public void initialize() {
-	   testJunit = new HelloCV();
+	   testJunit = new MainProcessor();
    }
 
    // Each parameter should be placed as an argument here
