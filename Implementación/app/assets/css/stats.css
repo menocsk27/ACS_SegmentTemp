@@ -1,0 +1,63 @@
+.homeButton {
+  position: fixed;
+  left: 5%;
+  top: 5%;
+}
+
+.querySelection {
+  display: block;
+  position: fixed;
+  width: 12%;
+  top: 20%;
+  left: 10%;
+}
+
+.statsDiv {
+  overflow-y: auto;
+  display: block;
+	position: fixed;
+  height: 100%;
+  width: 90%;
+	left: 5%;
+	right: 10%;
+}
+
+.backgroundModal {
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  display: none;
+  background-color: #1B1B1B;
+  opacity: 0.8;
+}
+
+.resultsModal {    
+  position: fixed;
+  height: 60%;
+  width: 45%;
+  z-index: 9999;
+  border-radius: 10px;
+  border-color: #D5D6D8;
+  display: none;
+  left: 27.5%;
+  top: 20%;
+}
+
+.scrolling {
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.customDate {
+  width:90%;
+}
+
+.NoneSelected {
+  top: 30%;
+  position: absolute;
+  left: 38%;
+  right: 38%;
+}

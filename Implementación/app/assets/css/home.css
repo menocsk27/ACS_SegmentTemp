@@ -1,0 +1,59 @@
+body {
+  overflow: hidden;
+}
+.backgroundModal {
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  display: none;
+  background-color: #1B1B1B;
+  opacity: 0.8;
+}
+.customModal {
+  position: fixed;
+  height: 60%;
+  width: 45%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  z-index: 9999;
+  border-radius: 10px;
+  border-color: #D5D6D8;
+  display: none;
+}
+.scrolling {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.caret.right {
+  border-left: 5px solid;
+  border-bottom: 4px solid transparent;
+  border-top: 4px solid transparent;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.customText {
+  color: #ffffff;
+  font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+}
+.abs {
+  position: absolute;
+  top: 65%;
+  right: 1%;
+}
+.infoIcon {
+  position: absolute;
+  bottom: 10%;
+  right: 1%;
+}
+
+.videoDiv{
+  position:absolute;
+  left:10%;
+  top:10%;
+}

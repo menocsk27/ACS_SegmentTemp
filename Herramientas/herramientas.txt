@@ -1,0 +1,30 @@
+Herramientas utilizadas en el proyecto
+
+En los siguientes enlaces se pueden encontrar enlaces a los instaladores o herramientas web utilizadas en este proyecto
+
+
+Overleaf: herramienta de edición colaborativa de documentos LaTeX
+overleaf.com
+
+Herramienta CASE: Enterprise Architect 12.1 (Instrucciones de instalación dentro del comprimido)
+https://www.dropbox.com/sh/h5x7cgfye2lqoyc/AAA_YfrbHZ29hCkUkKK_gNzYa?dl=0
+
+OpenCV 2.4.13
+https://www.dropbox.com/s/spgmfe82c0o0e8n/opencv-2.4.13.exe?dl=0
+
+SublimeText 3124 build
+https://www.dropbox.com/s/zu5b6pe3uucqvoo/Sublime%20Text%20Build%203124%20x64%20Setup.exe?dl=0
+
+
+Wamp 3.0.6
+https://www.dropbox.com/s/m1vsy4br0u4oee9/wampserver3.0.6_x64_apache2.4.23_mysql5.7.14_php5.6.25-7.0.10.exe?dl=0
+
+Eclipse IDE
+https://www.dropbox.com/s/2xfkijhnruqy2ou/eclipse-inst-win64.exe?dl=0
+
+CheckStyle Eclipse Plugin
+https://www.dropbox.com/s/4usfeaoiufmhs8g/net.sf.eclipsecs-updatesite_6.19.1.201607051943.zip?dl=0
+
+JSHint
+http://jshint.com/
+

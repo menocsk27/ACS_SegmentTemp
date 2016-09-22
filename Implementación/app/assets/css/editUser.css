@@ -1,0 +1,9 @@
+body{
+    overflow-x: hidden;
+}
+
+.upperLeftCorner {
+    position: fixed;
+    left: 5px;
+    top: 10px;
+}
