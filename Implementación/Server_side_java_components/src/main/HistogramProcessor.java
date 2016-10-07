@@ -1,4 +1,5 @@
-package Main;
+package main;
+
 import java.util.LinkedList;
 
 import org.opencv.core.Core;
@@ -12,15 +13,12 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 
 public class HistogramProcessor {
-
-	private final MatOfFloat histRange = new MatOfFloat(0, 256);  
-	private final MatOfInt histSize = new MatOfInt(256);  
-	private final MatOfInt histChannels = new MatOfInt(0); 
-	
-	HistogramProcessor(){}
-	
-	
-	
+  private final MatOfFloat histRange = new MatOfFloat(0, 256);
+  private final MatOfInt histSize = new MatOfInt(256);
+  private final MatOfInt histChannels = new MatOfInt(0); 
+  
+  HistogramProcessor(){}
+  
 	LinkedList<Mat> calculateHistoOfHueVideo(LinkedList<Mat> images){
 		
 		LinkedList<Mat> g =new LinkedList();

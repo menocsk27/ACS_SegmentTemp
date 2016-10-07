@@ -1,4 +1,4 @@
-package Main;
+package main;
 import org.opencv.core.*;
 import org.opencv.imgproc.*;  
 import org.opencv.highgui.Highgui;  

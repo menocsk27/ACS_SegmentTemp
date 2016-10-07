@@ -27,11 +27,11 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
                alert("No se puede hacer la conexión con el software.");
             }
     }
-  }
+  };
   
   window.onhashchange = function() {
     history.go(0);
-  }
+  };
   
   $("#uploadVideoDiv").on("click", function() {
     $('#selectVideoInput').click(); 
@@ -56,17 +56,17 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
   });
 
   $("#uploadVideoInput").click( function() {
-    if($('#selectVideoInput').val() == ""){
+    if($('#selectVideoInput').val() === ""){
       sweetAlert(
         'Nope',
         'Debe especificar un archivo de video para analizar.',
-        'error')    
+        'error');    
     }
     else{
       sweetAlert(
         'Por favor espere',
         'Su archivo está siendo subido',
-        'warning')
+        'warning');
     }
   });
 

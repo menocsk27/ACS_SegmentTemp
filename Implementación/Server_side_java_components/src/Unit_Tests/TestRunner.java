@@ -2,7 +2,7 @@ package Unit_Tests;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-import Main.MainProcessor;
+import main.MainProcessor;
 
 import org.junit.runner.*;
 public class TestRunner {
