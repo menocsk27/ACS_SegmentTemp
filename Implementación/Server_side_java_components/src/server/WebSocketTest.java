@@ -5,9 +5,9 @@ import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 
 public class WebSocketTest {
-  /**Clase de websocket para conectarse con la aplicacion web. 
-   * @param args parametro de entrada por defecto del main.
-   * @throws Exception Puede tirar excepciones por conexion del socket.
+  /**Main that the server should run to allow the web application to communicate with it. 
+   * @param args Default main arguments.
+   * @throws Exception Can throw exceptions because of socket connections.
    */
   public static void main(String[] args) throws Exception {
     Server server = new Server(9090);
