@@ -3,6 +3,7 @@ package main;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.*;
 import org.opencv.core.MatOfFloat;
 import org.opencv.core.MatOfInt;
 import org.opencv.core.Point;
@@ -19,7 +20,14 @@ public class HistogramProcessor {
   
   HistogramProcessor(){}
   
-  LinkedList<Mat> calculateHistoOfHueVideo(LinkedList<Mat> images) {
+  
+  /*
+   @arg1 images Estructura de datos que contiene los objetos Mat que representa los frames 
+   del video. 
+   @return linkedList Estructura de datos que contiene los objetos Mat que representa los 
+   histogramas del valor de matiz de cada frame.
+   */
+  public  LinkedList<Mat> calculateHistoOfHueVideo(LinkedList<Mat> images) {
     LinkedList<Mat> linkedList = new LinkedList();
     for (int i = 0; i < images.size(); i++) {
       Mat histograma = calculateHistoOfHueImage(images.get(i));
@@ -28,16 +36,26 @@ public class HistogramProcessor {
     return linkedList;
   }
   
-  Mat calculateHistoOfHueImage(Mat image) {
+  private Mat calculateHistoOfHueImage(Mat image) {
     Mat histogramH = new Mat(); 
     LinkedList<Mat> channelsImage = new LinkedList();  
     Core.split(image, channelsImage);
     Imgproc.calcHist(channelsImage, histChannels, new Mat(),
         histogramH, histSize, histRange, false);
+    //Se normaliza por el número de pixeles (resolución)
+    Core.normalize(histogramH, histogramH, 0, histogramH.rows() * histogramH.cols(),Core.NORM_L2, -1, new Mat()); 
+    /*
+    for (int i=0; i < histogramH.rows(); i++){
+    	histogramH histogramH.get(i, 0)[0]
+    }
+    */	
+    //histogramH.put
     return histogramH;
   }
   
-  void drawHistogram(Mat histogramH, String name, int width , int height) {
+
+  
+  public void drawHistogram(Mat histogramH, String name, int width , int height) {
     int counter;
     Mat histogramHimage = new Mat(width, height, CvType.CV_8UC3, new Scalar(0,0,0));
     int binW = (int) Math.round(width / histSize.get(0, 0)[0]);

@@ -32,10 +32,11 @@ public class MainProcessor {
     
     LinkedList<Mat> framesList = histProc.calculateHistoOfHueVideo(frames);
     Assert.assertTrue(framesList.size() > 15);
-    for (int j = 0; j < 4; j++) {
-      String name = "histograma" + Integer.toString(j) + ".jpg";
-      histProc.drawHistogram(framesList.get(j), name, 300, 300);
+    
+    for (int j = 0; j < 1/*framesList.size()*/; j++) {
+    	histProc.drawHistogram(framesList.get(j), "Histograma normalizado", 300, 300);
     }
+    
     return true;
   }
 }

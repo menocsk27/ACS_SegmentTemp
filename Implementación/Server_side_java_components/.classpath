@@ -11,6 +11,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hamcrest"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/junir"/>
 	<classpathentry exported="true" kind="lib" path="C:/jetty-all-9.3.11.v20160721-uber.jar"/>
-	<classpathentry kind="lib" path="C:/opencv/build/java/opencv-2413.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
