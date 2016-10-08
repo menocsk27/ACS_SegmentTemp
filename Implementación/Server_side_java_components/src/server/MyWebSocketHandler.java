@@ -1,6 +1,6 @@
 package server;
 
-import main.MainProcessor;
+import Main.MainProcessor;
 
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;

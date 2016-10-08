@@ -2,7 +2,7 @@ package unittests;
 
 import static org.junit.Assert.assertEquals;
 
-import main.MainProcessor;
+import Main.MainProcessor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,9 +41,9 @@ public class TestJunit {
   @Parameterized.Parameters
   public static Collection primeNumbers() {
     return Arrays.asList(new Object[][] {
-      {"C:/Dissolve1-15.mp4", true},
-      {"C:/Dissolve1-15 480x320 25 fps.mp4", true},
-      {"C:/windows-version.txt", false}
+      {"C:/Dissolve1-15.mp4", true}
+      //{"C:/Dissolve1-15 480x320 25 fps.mp4", true},
+      //{"C:/windows-version.txt", false}
     });
   }
   
