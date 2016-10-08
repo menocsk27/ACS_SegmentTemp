@@ -17,13 +17,29 @@
 
     </div>
 
-    <div id="uploadVideoDiv" class="item ui uploadIcon down"> 
+    <div id="uploadVideoDiv" class="item ui uploadIcon1 down"> 
       <i class="big icon upload"></i>  
     </div>
-
-  
     <div ng-show="false">
       <input type="file" id="selectVideoInput" name="file" ngf-select="uploadVideo($file, $invalidFiles)" accept="video/*"/>
+    </div>
+
+
+
+    <div id="uploadGroundTruth" class="item ui uploadIcon2 down">
+      <i class="big icon arrow up"></i>
+    </div>
+    <div ng-show="false">
+      <input type="file" id="selectGroundTruth" name="gtFile" ngf-select="uploadGT($file, $invalidFiles)" accept=".txt, .json, .xml, .csv, .yaml"/>
+    </div>
+
+
+
+    <div id="start" class="item ui check down">
+      <i class="big icon checkmark"></i>
+    </div>
+    <div ng-show="false">
+      <input type="button" id="selectStart" name="beginner" ngf-select="startTSA(null)"/>
     </div>
 
   </div>
