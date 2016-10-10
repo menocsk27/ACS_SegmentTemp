@@ -4,35 +4,68 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
   var videoUploaded = false;
   var groundTruthUploaded = false;
 
+  var validVidFiles = ["mp4", "avi"]
+  var validGTFiles = ["txt", "xml", "csv", "json", "yaml"]
+
+  $scope.validFile = function(validList, extToCheck) {
+    for (i in validList) {
+      if (validList[i] == extToCheck) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   $scope.uploadVideo = function(file){
+    var filename = file.name
+    var ext = filename.substring(filename.indexOf(".")+1,filename.length)
+    var valid = $scope.validFile(validVidFiles, ext);
+
     if (file) {
-      file.upload = Upload.upload({ url: '_segtemp-core/components/general/upload.php', data: { file: file } });
-      var videoDirection = document.getElementById('selectVideoInput').value;
-      var nameStart = (videoDirection.indexOf('\\') >= 0 ? videoDirection.lastIndexOf('\\') : videoDirection.lastIndexOf('/'));
-      videoFile = videoDirection.substring(nameStart+1);
-      sweetAlert(
+      if (valid) {
+        file.upload = Upload.upload({ url: '_segtemp-core/components/general/upload.php', data: { file: file } });
+        var videoDirection = document.getElementById('selectVideoInput').value;
+        var nameStart = (videoDirection.indexOf('\\') >= 0 ? videoDirection.lastIndexOf('\\') : videoDirection.lastIndexOf('/'));
+        videoFile = videoDirection.substring(nameStart+1);
+        sweetAlert(
             'Archivo enviado:',
             videoFile,
             'success');
-      videoUploaded = true;
+        videoUploaded = true;
+      }
+      else {
+        sweetAlert(
+            'Archivo inválido',
+            filename + " no es un archivo de video válido.",
+            'error');
+      }
     }
   };
 
   $scope.uploadGT = function(file){
+    var filename = file.name
+    var ext = filename.substring(filename.indexOf(".")+1,filename.length)
+    var valid = $scope.validFile(validGTFiles, ext);
+
     if (file) {
-      file.upload = Upload.upload({ url: '_segtemp-core/components/general/upload.php', data: { file: file } });
-      var groundTruthDirection = document.getElementById('selectGroundTruth').value;
-      var nameStart = (groundTruthDirection.indexOf('\\') >= 0 ? groundTruthDirection.lastIndexOf('\\') : groundTruthDirection.lastIndexOf('/'));
-      groundTruth = groundTruthDirection.substring(nameStart+1);
-      sweetAlert(
-            'Archivo enviado:',
-            groundTruth,
-            'success');
-      groundTruthUploaded = true;
+      if (valid) {
+        file.upload = Upload.upload({ url: '_segtemp-core/components/general/upload.php', data: { file: file } });
+        var groundTruthDirection = document.getElementById('selectGroundTruth').value;
+        var nameStart = (groundTruthDirection.indexOf('\\') >= 0 ? groundTruthDirection.lastIndexOf('\\') : groundTruthDirection.lastIndexOf('/'));
+        groundTruth = groundTruthDirection.substring(nameStart+1);
+        sweetAlert('Archivo enviado:', groundTruth, 'success');
+        groundTruthUploaded = true;
+      }
+      else {
+        sweetAlert(
+            'Archivo inválido',
+            filename + " no es un archivo de ground truth válido.",
+            'error');
+      }
     }
   };
 
-  function startTSA(){
+  $scope.startTSA = function(){
     if(videoUploaded){
       if ("WebSocket" in window){
         var ws = new WebSocket("ws://localhost:9090/");   //Si se pone algo despues del 9090/ se manda como mensaje que recibe java, aun no dice que la conexion esta hecha bien
@@ -77,18 +110,11 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
   };
   
   $("#uploadVideoDiv").on("click", function() {
-    console.log("1");
     $('#selectVideoInput').click(); 
   });
 
   $("#uploadGroundTruth").on("click", function() {
-    console.log("2");
     $('#selectGroundTruth').click();
-  });
-
-  $("#start").on("click", function() {
-    console.log("3");
-    startTSA();
   });
 
   $('.dropdown').dropdown({
@@ -104,52 +130,23 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
 
   $('.uploadIcon1').popup({
     position: 'left center',
-    title: 'Seleccionar video',
+    title: 'Seleccionar Video',
     target: '.ui.icon.infoIcon',
-    content: 'Seleccione el archivo y comienza la subida.'
+    content: 'Seleccione el video que desea analizar.'
   });
 
   $('.uploadIcon2').popup({
     position: 'left center',
     title: 'Seleccionar Ground Truth',
     target: '.ui.icon.infoIcon',
-    content: 'Seleccione el archivo de Ground Truth.'
+    content: 'Seleccione el archivo de Ground Truth para comparación.'
   });
 
   $('#start').popup({
     position: 'left center',
-    title: 'Iniciar',
+    title: 'Iniciar Segmentación',
     target: '.ui.icon.infoIcon',
-    content: 'Iniciar análisis de segmentación temporal.'
-  });
-
-  $("#selectVideoInpu").click( function() {
-    if($('#selectVideoInput').val() === ""){
-      sweetAlert(
-        'Nope',
-        'Debe especificar un archivo de video para analizar.',
-        'error');    
-    }
-    else{
-      sweetAlert(
-        'Por favor espere',
-        'Su archivo está siendo subido',
-        'warning');
-    }
-  });
-
-  $("#selectGroundTrut").click( function() {
-    if($('#selectGroundTruth').val() === ""){
-      sweetAlert(
-        'Nope',
-        'Debe especificar un archivo para mandar.',
-        'error');
-    }else{
-      sweetAlert(
-        'Por favor espere',
-        'Su archivo está siendo subido',
-        'warning');
-    }
+    content: 'Inicia el análisis de segmentación temporal.'
   });
 
 }]);

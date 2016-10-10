@@ -24,24 +24,17 @@
       <input type="file" id="selectVideoInput" name="file" ngf-select="uploadVideo($file, $invalidFiles)" accept="video/*"/>
     </div>
 
-
-
     <div id="uploadGroundTruth" class="item ui uploadIcon2 down">
-      <i class="big icon arrow up"></i>
+      <i class="big icon tasks"></i>
     </div>
     <div ng-show="false">
       <input type="file" id="selectGroundTruth" name="gtFile" ngf-select="uploadGT($file, $invalidFiles)" accept=".txt, .json, .xml, .csv, .yaml"/>
     </div>
 
-
-
-    <div id="start" class="item ui check down">
-      <i class="big icon checkmark"></i>
+    <div id="start" class="item ui check down" ng-click="startTSA()">
+      <i class="big bar chart icon"></i>
     </div>
-    <div ng-show="false">
-      <input type="button" id="selectStart" name="beginner" ngf-select="startTSA(null)"/>
-    </div>
-
+    
   </div>
   <div class="ui icon infoIcon" data-position="top left" data-inverted=""> <i class="big icon info circle"></i></div>
 
