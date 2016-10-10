@@ -1,20 +1,32 @@
+/*
+ * 
+ */
 package unittests;
 
-import Main.MainProcessor;
+
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestRunner.
+ */
 public class TestRunner {
-  /**Main function for testing.
-   * @param args Default main arguments.
+  
+  /**
+   * The main method.
+   *
+   * @param args the arguments
    */
   public static void main(String[] args) {
-    Result result = JUnitCore.runClasses(MainProcessor.class);
+    Result result = JUnitCore.runClasses(TestJUnitClasses.class);
+
     for (Failure failure : result.getFailures()) {
       System.out.println(failure.toString());
     }
+
     System.out.println(result.wasSuccessful());
   }
 }
