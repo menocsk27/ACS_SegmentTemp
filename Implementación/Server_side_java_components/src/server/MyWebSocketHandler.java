@@ -14,6 +14,8 @@ import java.io.IOException;
 @WebSocket
 public class MyWebSocketHandler {
   private MainProcessor observer = new MainProcessor();
+  private String groundTruth = "404";
+  private String videoRoute = "";
   
   @OnWebSocketClose
   public void onClose(int statusCode, String reason) {
@@ -44,12 +46,18 @@ public class MyWebSocketHandler {
    */
   @OnWebSocketMessage
   public void onMessage(String message) {
-    notify(message);
+    String type = message.substring(message.length() - 3);
     System.out.println("Message: " + message);
-    System.out.println("Histogramas creados en localhost");
+    if (type.equals("mp4") || type.equals("avi")) {
+      videoRoute = message;
+      notify(videoRoute, groundTruth);
+      System.out.println("Histogramas creados en localhost");
+    } else {
+      groundTruth = message;
+    }
   }
   
-  private void notify(String message) {
-    observer.validate(message);
+  private void notify(String videoRoute, String groundTruth) {
+    observer.validate(videoRoute, groundTruth);
   }
 }

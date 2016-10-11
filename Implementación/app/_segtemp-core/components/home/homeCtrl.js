@@ -74,10 +74,10 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
             'Conexión',
             'Se logró la conexión con el servidor.',
             'success');
-          ws.send('C:/wamp64/www/app/assets/temp/' + videoFile);
           if(groundTruthUploaded){
             ws.send('C:/wamp64/www/app/assets/temp/' + groundTruth); 
           }
+          ws.send('C:/wamp64/www/app/assets/temp/' + videoFile);
         };
         ws.onmessage = function (evt){ 
           var msg_recibido = evt.data;
