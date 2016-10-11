@@ -1,9 +1,11 @@
+/*
+ * @author Daniel Troyo
+ */
 package mainengine;
 
-import org.opencv.core.Mat;
-
-import java.lang.Math;
 import java.util.LinkedList;
+
+import org.opencv.core.Mat;
 
 public class BhattacharyyaHandler implements DistanceHistogramGenerator {
 
@@ -16,7 +18,7 @@ public class BhattacharyyaHandler implements DistanceHistogramGenerator {
     // Por cada bin de los histogramas
     double coef = 0;
     for (int bin = 0; bin < 256; bin++) {
-      System.out.println("Hist 1 bin: "+hist1.get(bin, 0)[0] );
+      // System.out.println("Hist 1 bin: "+hist1.get(bin, 0)[0] );
       coef += Math.sqrt(hist1.get(bin, 0)[0] * hist2.get(bin, 0)[0]);
     }
     return coef;
@@ -32,11 +34,11 @@ public class BhattacharyyaHandler implements DistanceHistogramGenerator {
     for (int bin = 0; bin < 256; bin++) {
       hist2Values.add(hist1.get(bin, 0)[0]);
     }
-    
+
     double denom; // denominador de la división
     double avgHist1;
     double avgHist2;
-    
+
     avgHist1 = calculator.calculateAverage(hist1Values);
     avgHist2 = calculator.calculateAverage(hist2Values);
     // 256 = M
@@ -55,7 +57,7 @@ public class BhattacharyyaHandler implements DistanceHistogramGenerator {
     coefBhattacharyya = this.obtainBhattacharyyaCoef(hist1, hist2);
     coefNormalized = this.obtainNormalizationCoef(hist1, hist2);
 
-    //double distance = 1 / Math.sqrt(1 - (coefNormalized * coefBhattacharyya));
+    // double distance = 1 / Math.sqrt(1 - (coefNormalized * coefBhattacharyya));
     double distance = Math.sqrt(1 - (coefBhattacharyya * coefNormalized));
     return distance;
   }
