@@ -6,6 +6,7 @@ import org.opencv.core.Mat;
 //import org.junit.runner.notification.Failure;
 //import org.junit.Assert;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class MainProcessor {
@@ -25,7 +26,8 @@ public class MainProcessor {
    * @param videoRoute Route to a local video file.
    * @return Boolean saying if a route to a video file is valid.
    */
-  public Boolean validate(String videoRoute) {
+  public ArrayList<String> validate(String videoRoute, String groundTruth) {
+    ArrayList<String> videos = new ArrayList<>();
     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     LinkedList<Mat> frames = vidProc.split_video_to_frames_hsv(videoRoute);
     Assert.assertTrue(frames.size() > 15);
@@ -36,6 +38,6 @@ public class MainProcessor {
       String name = "histograma" + Integer.toString(j) + ".jpg";
       histProc.drawHistogram(framesList.get(j), name, 300, 300);
     }
-    return true;
+    return videos;
   }
 }

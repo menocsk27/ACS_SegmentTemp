@@ -69,6 +69,8 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
     if(videoUploaded){
       if ("WebSocket" in window){
         var ws = new WebSocket("ws://localhost:9090/");   //Si se pone algo despues del 9090/ se manda como mensaje que recibe java, aun no dice que la conexion esta hecha bien
+        document.getElementById("videosDiv").innerHTML = "";
+
         ws.onopen = function(){
           sweetAlert(
             'Conexión',
@@ -79,11 +81,14 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
           }
           ws.send('C:/wamp64/www/app/assets/temp/' + videoFile);
         };
+        
         ws.onmessage = function (evt){ 
           var msg_recibido = evt.data;
           //Aqui se mandaria la direccion con los nuevos videos.
           alert("Mensaje recibido: " + msg_recibido);
+          document.getElementById("videosDiv").innerHTML += '<video width="500" controls><source src="' + msg_recibido + '" type="video/mp4">Your browser does not support HTML5 video.</video>';
         };       
+        
         ws.onclose = function(){
           sweetAlert(
             'Conexión cerrada',

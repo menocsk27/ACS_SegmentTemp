@@ -10,10 +10,14 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @WebSocket
 public class MyWebSocketHandler {
   private MainProcessor observer = new MainProcessor();
+  private Session session;
+  private ArrayList<String> videos = new ArrayList<>();
   private String groundTruth = "404";
   private String videoRoute = "";
   
@@ -32,12 +36,13 @@ public class MyWebSocketHandler {
    */
   @OnWebSocketConnect
   public void onConnect(Session session) {
+    this.session = session;
     System.out.println("Connect: " + session.getRemoteAddress().getAddress());
-    try {
-      session.getRemote().sendString("Hello Webbrowser");
-    } catch (IOException exception) {
-      exception.printStackTrace();
-    }
+    //try {
+    //  session.getRemote().sendString("Hello Webbrowser");
+    //} catch (IOException exception) {
+    //  exception.printStackTrace();
+    //}
   }
   
   /** Function that declares what to answer to the client whenever the socket receives a message.
@@ -50,14 +55,27 @@ public class MyWebSocketHandler {
     System.out.println("Message: " + message);
     if (type.equals("mp4") || type.equals("avi")) {
       videoRoute = message;
-      notify(videoRoute, groundTruth);
+      videos = notify(videoRoute, groundTruth);
       System.out.println("Histogramas creados en localhost");
+      sendFiles(videos);
     } else {
       groundTruth = message;
     }
   }
   
-  private void notify(String videoRoute, String groundTruth) {
-    observer.validate(videoRoute, groundTruth);
+  private void sendFiles(ArrayList<String> videos) {
+    for (String file : videos) {
+      try {
+        session.getRemote().sendString(file);
+      } catch (IOException exception) {
+        exception.printStackTrace();
+      }
+    }
+  }
+  
+  private ArrayList<String> notify(String videoRoute, String groundTruth) {
+    return observer.validate(videoRoute, groundTruth);
+    //return new ArrayList<String>(Arrays.asList("assets/temp/Dissolve1-15.mp4",
+    //    "assets/temp/Dissolve1-15.mp4", "assets/temp/Dissolve1-15.mp4"));
   }
 }
