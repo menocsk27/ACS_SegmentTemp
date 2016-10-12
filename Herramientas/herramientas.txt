@@ -12,6 +12,9 @@ https://www.dropbox.com/sh/h5x7cgfye2lqoyc/AAA_YfrbHZ29hCkUkKK_gNzYa?dl=0
 OpenCV 2.4.13
 https://www.dropbox.com/s/spgmfe82c0o0e8n/opencv-2.4.13.exe?dl=0
 
+OpenCV 3.1.0
+https://www.dropbox.com/s/2d1mo7g7f5b5tbj/opencv-3.1.0.exe?dl=0
+
 SublimeText 3124 build
 https://www.dropbox.com/s/zu5b6pe3uucqvoo/Sublime%20Text%20Build%203124%20x64%20Setup.exe?dl=0
 
@@ -28,3 +31,8 @@ https://www.dropbox.com/s/4usfeaoiufmhs8g/net.sf.eclipsecs-updatesite_6.19.1.201
 JSHint
 http://jshint.com/
 
+Doxygen
+https://sourceforge.net/projects/doxygen/files/latest/download?source=files
+
+Jenkins 
+https://jenkins.io/content/thank-you-downloading-windows-installer/

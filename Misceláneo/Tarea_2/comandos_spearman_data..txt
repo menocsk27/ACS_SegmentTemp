@@ -1,0 +1,100 @@
+Fallas Críticas
+
+[RHO,PVAL] = corr(numFallasCriticas', numCiclomatico', 'Type','Spearman') = 0.8304 !!
+
+[RHO,PVAL] = corr(numFallasCriticas', tAuditoriaImp', 'Type','Spearman') = -0.9564
+
+[RHO,PVAL] = corr(numFallasCriticas', tAuditoriaDis', 'Type','Spearman') = -0.0081
+
+[RHO,PVAL] = corr(numFallasCriticas', tDisenio', 'Type','Spearman') = 0.0695
+
+[RHO,PVAL] = corr(numFallasCriticas', tReqs', 'Type','Spearman') = -0.1449
+
+[RHO,PVAL] = corr(numFallasCriticas', numFuncs', 'Type','Spearman') =  0.1410
+
+[RHO,PVAL] = corr(numFallasCriticas', numLineas', 'Type','Spearman') = 0.0805
+
+
+
+
+
+------------------------------------------------
+Fallas Mayores
+
+
+[RHO,PVAL] = corr(numFallasMayores', numCiclomatico', 'Type','Spearman') = 0.9339
+
+[RHO,PVAL] = corr(numFallasMayores', tAuditoriaImp', 'Type','Spearman') = -0.8910
+
+[RHO,PVAL] = corr(numFallasMayores', tAuditoriaDis', 'Type','Spearman') = 0.1170
+
+[RHO,PVAL] = corr(numFallasMayores', tDisenio', 'Type','Spearman') = -0.0085
+
+[RHO,PVAL] = corr(numFallasMayores', tReqs', 'Type','Spearman')
+=  -0.2494
+
+[RHO,PVAL] = corr(numFallasMayores', numFuncs', 'Type','Spearman') = 0.2823
+
+[RHO,PVAL] = corr(numFallasMayores', numLineas', 'Type','Spearman') =  0.1824
+
+
+
+------------------------------------------------
+Fallas Menores
+
+[RHO,PVAL] = corr(numFallasMenores', numCiclomatico', 'Type','Spearman') =  0.0991
+
+[RHO,PVAL] = corr(numFallasMenores', tAuditoriaImp', 'Type','Spearman') =  -0.0050
+
+[RHO,PVAL] = corr(numFallasMenores', tAuditoriaDis', 'Type','Spearman') = 0.0666
+
+[RHO,PVAL] = corr(numFallasMenores', tDisenio', 'Type','Spearman') = -0.0795
+
+[RHO,PVAL] = corr(numFallasMenores', tReqs', 'Type','Spearman')
+ = -0.8513
+[RHO,PVAL] = corr(numFallasMenores', numFuncs', 'Type','Spearman') =   0.2087
+
+[RHO,PVAL] = corr(numFallasMenores', numLineas', 'Type','Spearman') =  0.6236
+
+
+
+------------------------------------------------
+Fallas Triviales
+
+[RHO,PVAL] = corr(numFallasTriviales', numCiclomatico', 'Type','Spearman') =  0.0455
+
+[RHO,PVAL] = corr(numFallasTriviales', tAuditoriaImp', 'Type','Spearman') =  -0.0467
+
+[RHO,PVAL] = corr(numFallasTriviales', tAuditoriaDis', 'Type','Spearman') = -0.3407
+
+[RHO,PVAL] = corr(numFallasTriviales', tDisenio', 'Type','Spearman') = 0.0334
+
+[RHO,PVAL] = corr(numFallasTriviales', tReqs', 'Type','Spearman') = 0.0207
+
+[RHO,PVAL] = corr(numFallasTriviales', numFuncs', 'Type','Spearman') = 0.4126
+
+[RHO,PVAL] = corr(numFallasTriviales', numLineas', 'Type','Spearman') = 0.1503
+
+
+
+------------------------------------------------
+Fallas Totales
+
+
+[RHO,PVAL] = corr(numTotalFallas', numCiclomatico', 'Type','Spearman') =  0.5491
+
+[RHO,PVAL] = corr(numTotalFallas', tAuditoriaImp', 'Type','Spearman') = -0.4824
+
+[RHO,PVAL] = corr(numTotalFallas', tAuditoriaDis', 'Type','Spearman') = 0.0145
+
+[RHO,PVAL] = corr(numTotalFallas', tDisenio', 'Type','Spearman') =  -0.0190
+
+
+[RHO,PVAL] = corr(numTotalFallas', tReqs', 'Type','Spearman') = -0.7558
+
+[RHO,PVAL] = corr(numTotalFallas', numFuncs', 'Type','Spearman') = 0.3642
+
+[RHO,PVAL] = corr(numTotalFallas', numLineas', 'Type','Spearman') = 0.6061
+
+
+
