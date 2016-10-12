@@ -56,10 +56,11 @@ public class HistogramProcessor {
 
 
   /**
-   * Calculates the histogram of hue channel of a hsv image.
-   *
-   * @param HSV image
-   * @return Hue channel's histogram
+   * Calculates the histogram of hue channel of a hsv image. It requires that the histograms passed
+   * as parameters should be in hsv format.
+   * 
+   * @param HSV image, represented as a MAT object.
+   * @return Hue channel's histogram, normalized between [0, 256] range.
    */
   private Mat calculateHistoOfHueImage(Mat image) {
 
@@ -79,9 +80,10 @@ public class HistogramProcessor {
     // Se genera el histograma
     Imgproc.calcHist(hValueframe, histChannels, new Mat(), histogramH, histSize, histRange, false);
     // Se normaliza por el número de pixeles (resolución)
-    // Core.normalize(histogramH, histogramH, 0, histogramH.rows() * histogramH.cols(),Core.NORM_L2,
-    // -1, new Mat());
-
+    /*
+     * Core.normalize(histogramH, histogramH, 0, histogramH.rows() * histogramH.cols(),Core.NORM_L2,
+     * -1, new Mat());
+     */
     for (int i = 0; i < histogramH.total(); i++) {
       histogramH.put(i, 0, histogramH.get(i, 0)[0] / capaH.total());
     }
@@ -92,12 +94,15 @@ public class HistogramProcessor {
 
 
   /**
-   * Creates an image of a histogram represented as a MAT object.
+   * Creates an image of a histogram represented as a MAT object. It does all the normalization and
+   * linearization process for representing the histogram as an image.
    *
    * @param histogramH Histogram instance
-   * @param name of the file, including the extension of the file.
-   * @param width pixels of the image
-   * @param height pixels of the image
+   * @param name of the file, including the extension of the file. Let's say: "image.jpg" JPG, JPEG
+   *        and PNG formats are preferred.
+   * @param width The number of pixels in each row of the image of the histogram. Resolution.
+   * @param height The number of rows of the image of the histogram, represented as rows of pixels.
+   *        Resolution.
    */
   public void drawHistogram(Mat histogramH, String name, int width, int height) {
     int counter;
