@@ -1,6 +1,6 @@
 add_header=true
 eclipse.preferences.version=1
-header_text=/*\r\n * @author Daniel Troyo\r\n */
+header_text=/*\r\n * @author Daniel Troyo\r\n * @version 0.1.0\r\n */
 include_subpackages=true
 project_specific_settings=true
 replace_header=true

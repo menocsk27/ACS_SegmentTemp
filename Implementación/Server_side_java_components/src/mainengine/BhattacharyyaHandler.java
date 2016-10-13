@@ -1,5 +1,7 @@
 /*
  * @author Daniel Troyo
+ * 
+ * @version 0.1.0
  */
 package mainengine;
 
@@ -9,22 +11,25 @@ import org.opencv.core.Mat;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class BhattacharyyaHandler.
+ * The Class BhattacharyyaHandler. This class implements the calculations that are necessary for
+ * calculate the distance or difference radio between two histograms using the bhattacharyya's
+ * distance method.
  */
 public class BhattacharyyaHandler implements DistanceHistogramGenerator {
 
-  /** The calculator. */
+  /** The calculator that */
   private StadisticalCalculator calculator = new NumericalDataCalculator();
 
   /**
-   * Instantiates a new bhattacharyya handler.
+   * Instantiates a new bhattacharyya handler object.
    */
   public BhattacharyyaHandler() {}
 
 
   /**
-   * Obtain bhattacharyya's coefficient.
-   *
+   * Obtain bhattacharyya's coefficient. The bhattacharyya coefficient is calculated via the next
+   * formula: \f$ \beta = \sum_{i}^{n=NumberValuesHistBins} \sqrt{h_1 (i) h_2 (i)} \f$
+   * 
    * @param hist1 First histogram, represented as a MAT object.
    * @param hist2 Second histogram, represented as a MAT object.
    * @return the double
@@ -42,6 +47,9 @@ public class BhattacharyyaHandler implements DistanceHistogramGenerator {
   /**
    * Obtain normalization coefficient for the bhattcharyya's distance calculation.
    *
+   * The normalization coefficient is calculated via the next formula: \f$
+   * \alpha=\frac{1}{\sqrt{\overline{h_1}\overline{h_2}M^{2}}} \f$
+   * 
    * @param hist1 First histogram, represented as a MAT object.
    * @param hist2 Second histogram, represented as a MAT object.
    * @return the double
@@ -73,8 +81,9 @@ public class BhattacharyyaHandler implements DistanceHistogramGenerator {
   }
 
   /**
-   * Function that returns the bhattacharyya distance between two histograms.
-   *
+   * Function that returns the bhattacharyya distance between two histograms. The bhattacharyya
+   * distance is calculated via the next formula: \f$ d_b(h_1, h_2) = \sqrt{1-\alpha \beta } \f$
+   * 
    * @param hist1 First histogram, represented as a MAT object.
    * @param hist2 Second histogram, represented as a MAT object.
    * @return The distance, must be a value in the range [0,1]. It doesn't work if it is in another
@@ -92,8 +101,10 @@ public class BhattacharyyaHandler implements DistanceHistogramGenerator {
     return distance;
   }
 
-  /*
+  /**
    * (non-Javadoc)
+   * 
+   * This function returns two histograms
    * 
    * @see mainengine.DistanceHistogramGenerator#generateDistanceArray(java.util.LinkedList)
    */

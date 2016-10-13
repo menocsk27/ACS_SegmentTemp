@@ -1,5 +1,7 @@
 /*
  * @author Daniel Troyo
+ * 
+ * @version 0.1.0
  */
 
 package mainengine;
@@ -8,6 +10,7 @@ import java.util.LinkedList;
 
 import javafx.util.Pair;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface GroundtruthReader.
  */

@@ -1,5 +1,7 @@
 /*
  * @author Daniel Troyo
+ * 
+ * @version 0.1.0
  */
 package mainengine;
 
@@ -13,10 +15,10 @@ public class NumericalDataCalculator implements StadisticalCalculator {
 
 
   /**
-   * Calculate variance.
+   * This function returns the variance of a collection of decimal values passed as a LinkedList
    *
-   * @param set the set
-   * @return the double
+   * @param set Collection of decimal values.
+   * @return The variance value of the set passed as parameter.
    */
   private double calculateVariance(LinkedList<Double> set) {
     double variance = 0;
@@ -34,20 +36,24 @@ public class NumericalDataCalculator implements StadisticalCalculator {
    */
   public NumericalDataCalculator() {}
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see mainengine.StadisticalCalculator#calculateAverage(java.util.LinkedList)
    */
   @Override
   public double calculateAverage(LinkedList<Double> set) {
     double average = 0;
     for (int i = 0; i < set.size(); i++) {
-      average += (double) set.get(i);
+      average += set.get(i);
     }
     average = average / set.size();
     return average;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see mainengine.StadisticalCalculator#calculateStdDeviation(java.util.LinkedList)
    */
   @Override

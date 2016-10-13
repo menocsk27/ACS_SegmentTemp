@@ -1,5 +1,7 @@
 /*
  * @author Daniel Troyo
+ * 
+ * @version 0.1.0
  */
 package mainengine;
 
@@ -11,24 +13,30 @@ import org.opencv.core.Mat;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class MainProcessor.
+ * The Class MainProcessor. Main class of the program and the one handling the main flow of the
+ * program. Using the interface of the other classes.
  */
 public class MainProcessor {
 
-  /** The vid proc. */
+  /** The Video Segmenter assign to the treatment of video files and image processing.. */
   private static VideoSegmenter vidProc;
 
-  /** The hist proc. */
+  /** The Processor of histograms and all the operations related. */
   private static HistogramProcessor histProc;
 
-  /** The cut validator. */
+  /**
+   * The instance assign with the tasks of verifying if there's a cut between two frames based on
+   * the distance between the histograms of the frames.
+   */
   private static UmbralizationProcessor cutValidator;
 
-  /** The distance obtainer. */
+  /**
+   * The instance assign with the tasks of obtaining the distance between the frames of the video.
+   */
   private static DistanceHistogramGenerator distanceObtainer;
 
   /**
-   * Sets the environment.
+   * Sets the environment for the class, initializing its attributes.
    */
   private void setEnvironment() {
     vidProc = new VideoSegmenter();
@@ -47,9 +55,16 @@ public class MainProcessor {
 
 
   /**
-   * Function that receives the local route to a video file and validates if it contains a video.
+   * Function that receives the local route to a video file and local route to a csv groundTruth
+   * file. It starts the main time video segmentation and displays the results or comparisons with
+   * the ground truth file. The ground truth file must be a four column file containing: Initial
+   * frame of the cut in the first column Last frame of the cut in the second column Type of the
+   * event. Not used in the segmentation nor the ground truth comparison. Type of the cut. Not used
+   * in the segmentation nor the ground truth comparison. The function only accepts avi or mp4 video
+   * files.
    * 
    * @param videoRoute Route to a local video file.
+   * @param groundTruth the ground truth
    * @return Boolean saying if a route to a video file is valid.
    */
   public boolean startMainflow(String videoRoute, String groundTruth) {

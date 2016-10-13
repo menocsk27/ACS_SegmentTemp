@@ -1,5 +1,7 @@
 /*
  * @author Daniel Troyo
+ * 
+ * @version 0.1.0
  */
 package mainengine;
 
@@ -17,21 +19,34 @@ import org.opencv.imgproc.Imgproc;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class HistogramProcessor.
+ * The Class HistogramProcessor. It deals with all the processing between MAT objets. These include
+ * all the histogram processing and dealing with MAT objects which represent frames or channels of
+ * frames. * @see <a href=
+ * "http://docs.opencv.org/2.4.13/doc/tutorials/core/mat_the_basic_image_container/mat_the_basic_image_container.html?highlight=mat">
+ * MAT Object - Official Doc</a>
+ * 
  */
 public class HistogramProcessor {
 
-  /** The histogram range. */
+  /** The range of the histogram obtained from the normalized Hue channel of each frame. */
   private final MatOfFloat histRange = new MatOfFloat(0, 256);
 
-  /** The histogram size or number of bins. */
+  /**
+   * The size or number of bins of the histogram obtained from the normalized Hue channel of each
+   * frame.
+   */
   private final MatOfInt histSize = new MatOfInt(256);
 
-  /** The histogram channels, only one for hue. */
+  /**
+   * The number of channels of the histogram obtained from the normalized Hue channel of each frame.
+   * In this case, only one for the hue channel.
+   */
   private final MatOfInt histChannels = new MatOfInt(0);
 
+  /** The max hue channel. */
   private final double maxHueChannel = 255;
 
+  /** The max hue channel after split. */
   private final double maxHueChannelAfterSplit = 360;
 
 
@@ -39,6 +54,9 @@ public class HistogramProcessor {
    * Splits a frame passed as parameter into three channels and returns the first one of these,
    * being the hue channel MAT object.
    *
+   * @see <a href=
+   *      "http://docs.opencv.org/2.4.13/doc/tutorials/core/mat_the_basic_image_container/mat_the_basic_image_container.html?highlight=mat">
+   *      MAT Object - Official Doc</a>
    * @param frameHSV The Mat object that represents the frame passed as parameter.
    * @return The MAT object that represents the HUE channel of the frame passed as parameter
    */
@@ -56,6 +74,10 @@ public class HistogramProcessor {
    *
    * @param frameHSV the frame HSV
    * @return the MAT object that represents the normalized channel of the hue channel
+   * @see <a href=
+   *      "http://docs.opencv.org/2.4.13/doc/tutorials/core/mat_the_basic_image_container/mat_the_basic_image_container.html?highlight=mat">
+   *      MAT Object - Official Doc</a>
+   * 
    */
   private Mat obtainNormalizedhChannel(Mat frameHSV) {
     Mat capaHnormalized = this.obtainHchannel(frameHSV);
@@ -76,10 +98,15 @@ public class HistogramProcessor {
 
   /**
    * It normalizes the histogram obtained from the hue channel and leaves it with [0,1] values. It
-   * is supposed to received a histogram with values within the range [0-255[
-   *
+   * is supposed to received a histogram with values within the range [0-255[ This function only
+   * receives these kind of histograms. Any other will be tre
+   * 
    * @param normHueHist The histogram obtained from the normalized hue channel MAT Object
+   * @param pixelNumber the pixel number
    * @return The normalized histogram with values within the range [0, 1]
+   * @see <a href=
+   *      "http://docs.opencv.org/2.4.13/doc/tutorials/core/mat_the_basic_image_container/mat_the_basic_image_container.html?highlight=mat">
+   *      MAT Object - Official Doc</a>
    */
   private Mat normHistHueChannel(Mat normHueHist, double pixelNumber) {
     double valTemp;
@@ -94,37 +121,11 @@ public class HistogramProcessor {
     return normHueHist;
   }
 
-
-  /**
-   * Instantiates a new histogram processor.
-   */
-  public HistogramProcessor() {}
-
-
-  /**
-   * Calculates the hue channel's histogram of each frame passed as parameter.
-   * 
-   * @param images Collection of hsv frames of the video.
-   * @return listOfHueHistograms Collection of the histogram of the hue channel of each frame.
-   */
-
-  public LinkedList<Mat> calculateHistoOfHueVideo(LinkedList<Mat> images) {
-    LinkedList<Mat> listOfHueHistograms = new LinkedList<Mat>();
-    for (int i = 0; i < images.size(); i++) {
-      Mat histograma = calculateHistoOfHueImage(images.get(i));
-      listOfHueHistograms.add(histograma);
-    }
-    // Highgui.imwrite("histograma_normalizado_hue.jpg", listOfHueHistograms.get(10));
-    return listOfHueHistograms;
-  }
-
-
-
   /**
    * Calculates the histogram of hue channel of a hsv image. It requires that the histograms passed
    * as parameters be in hsv format.
-   * 
-   * @param HSV image, represented as a MAT object.
+   *
+   * @param image the image
    * @return Hue channel's histogram, normalized between [0, 256] range.
    */
   private Mat calculateHistoOfHueImage(Mat image) {
@@ -142,6 +143,33 @@ public class HistogramProcessor {
     // this.drawHistogram(histogramH, "histograma.jpg", 300, 400);
     histogramH = normHistHueChannel(histogramH, capaHnormalized.total());
     return histogramH;
+  }
+
+
+  /**
+   * Instantiates a new histogram processor.
+   */
+  public HistogramProcessor() {}
+
+
+  /**
+   * Calculates the hue channel's histogram of each frame passed as parameter.
+   * 
+   * @param images Collection of hsv frames of the video.
+   * @return listOfHueHistograms Collection of the histogram of the hue channel of each frame.
+   * @see <a href=
+   *      "http://docs.opencv.org/2.4.13/doc/tutorials/core/mat_the_basic_image_container/mat_the_basic_image_container.html?highlight=mat">
+   *      MAT Object - Official Doc</a>
+   */
+
+  public LinkedList<Mat> calculateHistoOfHueVideo(LinkedList<Mat> images) {
+    LinkedList<Mat> listOfHueHistograms = new LinkedList<Mat>();
+    for (int i = 0; i < images.size(); i++) {
+      Mat histograma = calculateHistoOfHueImage(images.get(i));
+      listOfHueHistograms.add(histograma);
+    }
+    // Highgui.imwrite("histograma_normalizado_hue.jpg", listOfHueHistograms.get(10));
+    return listOfHueHistograms;
   }
 
 

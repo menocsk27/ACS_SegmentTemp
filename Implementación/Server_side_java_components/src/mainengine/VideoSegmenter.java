@@ -1,17 +1,23 @@
+/*
+ * @author Daniel Troyo
+ * 
+ * @version 0.1.0
+ */
 package mainengine;
+
+import java.io.File;
+import java.util.LinkedList;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.videoio.Videoio;
-import org.opencv.videoio.VideoWriter;
-import org.opencv.highgui.VideoCapture;
 import org.opencv.highgui.Highgui;
-import java.io.File;
-import java.util.LinkedList;
+import org.opencv.highgui.VideoCapture;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.videoio.VideoWriter;
+import org.opencv.videoio.Videoio;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class VideoSegmenter.
  */
@@ -29,6 +35,7 @@ public class VideoSegmenter {
   /** The fps video code. */
   private static int fpsVideoCode = Videoio.CAP_PROP_FPS;
 
+  /** The fourcc video code. */
   private static int fourccVideoCode = Videoio.CAP_PROP_FOURCC;
 
   /** The width last video read. */
@@ -40,6 +47,7 @@ public class VideoSegmenter {
   /** The fps last video read. */
   private static double fpsLastVideoRead;
 
+  /** The four CC video read. */
   private static double fourCCVideoRead;
 
 
@@ -72,8 +80,8 @@ public class VideoSegmenter {
     if (fpsLastVideoRead < 1) {
       fpsLastVideoRead = 24;
     }
-    System.out.println("Res: ("+widthLastVideoRead+","+heightLastVideoRead+")");
-    System.out.println("FPS: "+fpsLastVideoRead);
+    System.out.println("Res: (" + widthLastVideoRead + "," + heightLastVideoRead + ")");
+    System.out.println("FPS: " + fpsLastVideoRead);
     System.out.println(fourCCVideoRead);
   }
 
@@ -101,7 +109,7 @@ public class VideoSegmenter {
 
     setVideoproperties(capture);
     capture.release();
-    
+
 
     return images;
   }
@@ -116,9 +124,9 @@ public class VideoSegmenter {
   public void createVideofromframes(LinkedList<Mat> frames, String filename) {
     VideoWriter writer;
     Highgui.imwrite("imagen.jpg", frames.get(0));
-    System.out.println("Frame size: "+frames.get(0).width()+frames.get(0).height());
+    System.out.println("Frame size: " + frames.get(0).width() + frames.get(0).height());
     System.loadLibrary("opencv_java310");
-    VideoWriter.fourcc('I', 'Y','U', 'V');
+    VideoWriter.fourcc('I', 'Y', 'U', 'V');
     Size resolution =
         new Size(VideoSegmenter.widthLastVideoRead, VideoSegmenter.heightLastVideoRead);
     writer = new VideoWriter(filename, -1, VideoSegmenter.fpsLastVideoRead, resolution, true);
