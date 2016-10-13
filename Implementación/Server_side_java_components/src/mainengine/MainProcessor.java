@@ -54,14 +54,12 @@ public class MainProcessor {
    */
   public boolean startMainflow(String videoRoute, String groundTruth) {
     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    // Obtengo frames hsv del video los guardo en el frames
     LinkedList<Mat> frames = vidProc.split_video_to_frames_hsv(videoRoute);
     Assert.assertTrue(frames.size() > 15);
-
-
-
+    // Obtengo los histogramas de la capa H de cada frame
     LinkedList<Mat> histogramList = histProc.calculateHistoOfHueVideo(frames);
     Assert.assertTrue(histogramList.size() > 15);
-
     // histProc.drawHistogram(histogramList.get(0), "Histograma normalizado.png", 300, 300);
     LinkedList<Double> distanceArray = distanceObtainer.generateDistanceArray(histogramList);
     Assert.assertTrue(distanceArray.size() == histogramList.size() - 1);
@@ -74,10 +72,9 @@ public class MainProcessor {
     LinkedList<Boolean> cutsArray = cutValidator.obtainCuts(distanceArray);
     Assert.assertTrue(cutsArray.size() == distanceArray.size());
     // value
-
-    for (int i = 0; i < cutsArray.size(); i++) {
-      System.out.println(i);
-    }
+    /*
+     * for (int i = 0; i < cutsArray.size(); i++) { System.out.println(i); }
+     */
     return true;
   }
 }

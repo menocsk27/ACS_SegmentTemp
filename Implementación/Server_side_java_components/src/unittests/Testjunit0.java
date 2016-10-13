@@ -1,11 +1,14 @@
+/*
+ * @author Daniel Troyo
+ */
 package unittests;
 
 
-import org.junit.BeforeClass;
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.junit.runners.Parameterized;
 
 import mainengine.BhattacharyyaHandler;
@@ -15,9 +18,6 @@ import mainengine.MainProcessor;
 import mainengine.ThreeSigmaUmbralizator;
 import mainengine.UmbralizationProcessor;
 import mainengine.VideoSegmenter;
-
-import java.util.Arrays;
-import java.util.Collection;
 
 @RunWith(Parameterized.class)
 
@@ -54,7 +54,7 @@ public class Testjunit0 {
   @Test
   public void validateCompleteProcess() {
     System.out.println("String cargado como videofile: " + videoRoute);
-    this.testJunitTest.startMainflow(videoRoute);
+    this.testJunitTest.startMainflow(videoRoute, "");
   }
 
 

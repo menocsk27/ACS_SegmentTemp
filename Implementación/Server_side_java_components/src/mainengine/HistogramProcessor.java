@@ -30,6 +30,71 @@ public class HistogramProcessor {
   /** The histogram channels, only one for hue. */
   private final MatOfInt histChannels = new MatOfInt(0);
 
+  private final double maxHueChannel = 255;
+
+  private final double maxHueChannelAfterSplit = 360;
+
+
+  /**
+   * Splits a frame passed as parameter into three channels and returns the first one of these,
+   * being the hue channel MAT object.
+   *
+   * @param frameHSV The Mat object that represents the frame passed as parameter.
+   * @return The MAT object that represents the HUE channel of the frame passed as parameter
+   */
+  private Mat obtainHchannel(Mat frameHSV) {
+    LinkedList<Mat> channelsImage = new LinkedList<Mat>();
+    Core.split(frameHSV, channelsImage);
+    Mat capaH;
+    capaH = channelsImage.get(0);
+    return capaH;
+  }
+
+  /**
+   * It returns the normalized [0-256] image or MAT OBJECT of the hue channel of a frame passed as
+   * parameter.
+   *
+   * @param frameHSV the frame HSV
+   * @return the MAT object that represents the normalized channel of the hue channel
+   */
+  private Mat obtainNormalizedhChannel(Mat frameHSV) {
+    Mat capaHnormalized = this.obtainHchannel(frameHSV);
+
+    // Se recorre la matriz en dos dimensiones, normalizándola.
+    double valTemp;
+    for (int i = 0; i < capaHnormalized.rows(); i++) {
+      for (int j = 0; j < capaHnormalized.cols(); j++) {
+        valTemp = capaHnormalized.get(i, j)[0];
+        valTemp = valTemp / maxHueChannelAfterSplit; // Entre 360 -> queda [0,1]
+        valTemp = valTemp * maxHueChannel; // Por 255 -> queda [0,255]
+        capaHnormalized.put(i, j, valTemp); // Queda [0,1]
+        // System.out.println(capaHnormalized.get(i, j)[0]);
+      }
+    }
+    return capaHnormalized;
+  }
+
+  /**
+   * It normalizes the histogram obtained from the hue channel and leaves it with [0,1] values. It
+   * is supposed to received a histogram with values within the range [0-255[
+   *
+   * @param normHueHist The histogram obtained from the normalized hue channel MAT Object
+   * @return The normalized histogram with values within the range [0, 1]
+   */
+  private Mat normHistHueChannel(Mat normHueHist, double pixelNumber) {
+    double valTemp;
+    double valorSuma = 0;
+    for (int i = 0; i < normHueHist.total(); i++) {
+      valTemp = normHueHist.get(i, 0)[0];
+      valTemp = valTemp / pixelNumber; // Entre número de pixeles de la imagen
+      normHueHist.put(i, 0, valTemp); // Queda [0,1]
+      valorSuma += normHueHist.get(i, 0)[0];
+    }
+    System.out.println("Suma Histograma normalizado:" + valorSuma);
+    return normHueHist;
+  }
+
+
   /**
    * Instantiates a new histogram processor.
    */
@@ -57,37 +122,25 @@ public class HistogramProcessor {
 
   /**
    * Calculates the histogram of hue channel of a hsv image. It requires that the histograms passed
-   * as parameters should be in hsv format.
+   * as parameters be in hsv format.
    * 
    * @param HSV image, represented as a MAT object.
    * @return Hue channel's histogram, normalized between [0, 256] range.
    */
   private Mat calculateHistoOfHueImage(Mat image) {
 
-    Mat capaH = new Mat();
-    LinkedList<Mat> channelsImage = new LinkedList();
+    Mat capaHnormalized = new Mat();
 
-    // Se obtiene la capa del Hue del frame HSV
-    Core.split(image, channelsImage);
-    capaH = channelsImage.get(0);
-    Core.normalize(capaH, capaH, 0, 256, Core.NORM_MINMAX, -1, new Mat());
-
+    // Capa h normalizada
+    // capaHnormalized = this.obtainNormalizedhChannel(image);
     // Valores para el nuevo histograma a generar a partir de dicha capa
     Mat histogramH = new Mat();
-
     LinkedList<Mat> hValueframe = new LinkedList<Mat>();
-    hValueframe.add(capaH);
+    hValueframe.add(capaHnormalized);
     // Se genera el histograma
     Imgproc.calcHist(hValueframe, histChannels, new Mat(), histogramH, histSize, histRange, false);
-    // Se normaliza por el número de pixeles (resolución)
-    /*
-     * Core.normalize(histogramH, histogramH, 0, histogramH.rows() * histogramH.cols(),Core.NORM_L2,
-     * -1, new Mat());
-     */
-    for (int i = 0; i < histogramH.total(); i++) {
-      histogramH.put(i, 0, histogramH.get(i, 0)[0] / capaH.total());
-    }
-
+    // this.drawHistogram(histogramH, "histograma.jpg", 300, 400);
+    histogramH = normHistHueChannel(histogramH, capaHnormalized.total());
     return histogramH;
   }
 
