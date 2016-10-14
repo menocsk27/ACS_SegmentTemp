@@ -96,8 +96,7 @@ public class BhattacharyyaHandler implements DistanceHistogramGenerator {
     coefBhattacharyya = this.obtainBhattacharyyaCoef(hist1, hist2);
     coefNormalized = this.obtainNormalizationCoef(hist1, hist2);
 
-    double distance = 1 / Math.sqrt(1 - (coefNormalized * coefBhattacharyya));
-    // double distance = Math.sqrt(1 - (coefBhattacharyya * coefNormalized));
+    double distance = Math.sqrt(1 - (coefBhattacharyya * coefNormalized));
     return distance;
   }
 

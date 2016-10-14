@@ -33,7 +33,7 @@ public class CsvGroundtruthreader implements GroundtruthReader {
    */
   private LinkedList<String[]> getLines(String fileRoute) {
     String line = "";
-    String csvSplitsymbol = ",";
+    String csvSplitsymbol = ";";
     LinkedList<String[]> lines = new LinkedList<String[]>();
     try (BufferedReader br = new BufferedReader(new FileReader(fileRoute))) {
       while ((line = br.readLine()) != null) {
@@ -54,8 +54,17 @@ public class CsvGroundtruthreader implements GroundtruthReader {
   @Override
   public LinkedList<Pair<Integer, Integer>> getAbsolutecuts(String fileRoute) {
     LinkedList<String[]> linesOfFile = this.getLines(fileRoute);
-
-    return null;
+    LinkedList<Pair<Integer, Integer>> cuts = new LinkedList<Pair<Integer, Integer>>();
+    Pair<Integer, Integer> cut;
+    String initialFrame;
+    String lastFrame;
+    for (int i = 1; i< linesOfFile.size(); i++){ //No lee la fila de títulos
+      initialFrame = linesOfFile.get(i)[0];
+      lastFrame = linesOfFile.get(i)[1];
+      cut = new Pair<Integer, Integer>(Integer.parseInt(initialFrame),Integer.parseInt(lastFrame));
+      cuts.add(cut);
+    }
+    return cuts;
   }
 
 }

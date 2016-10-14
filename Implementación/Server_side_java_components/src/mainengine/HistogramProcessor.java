@@ -117,7 +117,7 @@ public class HistogramProcessor {
       normHueHist.put(i, 0, valTemp); // Queda [0,1]
       valorSuma += normHueHist.get(i, 0)[0];
     }
-    System.out.println("Suma Histograma normalizado:" + valorSuma);
+    //System.out.println("Suma Histograma normalizado:" + valorSuma);
     return normHueHist;
   }
 
@@ -131,7 +131,7 @@ public class HistogramProcessor {
   private Mat calculateHistoOfHueImage(Mat image) {
 
     Mat capaHnormalized = new Mat();
-
+    capaHnormalized = this.obtainHchannel(image);
     // Capa h normalizada
     // capaHnormalized = this.obtainNormalizedhChannel(image);
     // Valores para el nuevo histograma a generar a partir de dicha capa
