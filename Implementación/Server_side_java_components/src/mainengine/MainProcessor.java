@@ -11,6 +11,8 @@ import org.junit.Assert;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
+import javafx.util.Pair;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class MainProcessor. Main class of the program and the one handling the main flow of the
@@ -90,6 +92,13 @@ public class MainProcessor {
     /*
      * for (int i = 0; i < cutsArray.size(); i++) { System.out.println(i); }
      */
+    GroundtruthReader lectorGt = new CsvGroundtruthreader();
+    LinkedList<Pair<Integer, Integer>> sceneCuts = lectorGt.getAbsolutecuts("groundtruth.csv");
+    PrecisionAnalyzer metricAnalyzer = new falseValuesProcessor();
+    System.out
+        .println("Falsos positivos: " + metricAnalyzer.getFalsepositives(sceneCuts, cutsArray));
+    System.out
+        .println("Falsos negativos: " + metricAnalyzer.getFalsenegatives(sceneCuts, cutsArray));
     return true;
   }
 }

@@ -19,10 +19,7 @@ public class MainProgramTemp {
   public static void main(String[] args) {
 
     MainProcessor program = new MainProcessor();
-    GroundtruthReader lectorGt = new CsvGroundtruthreader();
-    lectorGt.getAbsolutecuts("groundtruth.csv");
-    
-    //program.startMainflow("Dissolve1-15.mp4", null);
+    program.startMainflow("Dissolve1-15.mp4", null);
 
   }
 
