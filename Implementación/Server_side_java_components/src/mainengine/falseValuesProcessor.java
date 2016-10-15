@@ -15,7 +15,7 @@ import javafx.util.Pair;
  *
  * @author Daniel
  */
-public class falseValuesProcessor implements FalseValuesAnalyzer {
+public class falseValuesProcessor implements PrecisionAnalyzer {
 
 
 
@@ -74,12 +74,12 @@ public class falseValuesProcessor implements FalseValuesAnalyzer {
    */
   private LinkedList<Integer> getCutsobtained(LinkedList<Boolean> cutsObtained) {
     LinkedList<Integer> cutPosObtained = new LinkedList<Integer>();
-    cutPosObtained.add(1);
     for (int i = 0; i < cutsObtained.size(); i++) {
-      if (cutsObtained.get(i) == true) { // Hay un corte entre el frame i y el frame i+1. Se asigna
-                                         // en el frame i y frame i+1
+      if (cutsObtained.get(i) == true) { /*
+                                          * Hay un corte entre el frame i y el frame i+1. Se asigna
+                                          * en el frame i y frame i+1
+                                          */
         cutPosObtained.add(i); // Porque los frames según el GT base dado por el profesor comienzan
-        cutPosObtained.add(i + 1);
       }
     }
     return cutPosObtained;
@@ -101,8 +101,9 @@ public class falseValuesProcessor implements FalseValuesAnalyzer {
     for (int i = 0; i < cutsObtained.size(); i++) {
       if (cutsObtained.get(i) == true) { // Hay un corte entre el frame i y el frame i+1. Se asigna
                                          // en el frame i y frame i+1
+
+      } else {
         cutPosObtained.add(i); // Porque los frames según el GT base dado por el profesor comienzan
-        cutPosObtained.add(i + 1);
       }
     }
     return cutPosObtained;
@@ -123,12 +124,12 @@ public class falseValuesProcessor implements FalseValuesAnalyzer {
    */
   private boolean ismatch(LinkedList<Integer> collectionExpectedFrames, int frameObtained,
       int numberFrames) {
-    int deltaRangeBegin = frameObtained - 5;
-    int deltaRangeEnd = frameObtained + 5;
+    int deltaRangeBegin = frameObtained - 10;
+    int deltaRangeEnd = frameObtained + 10;
     if (deltaRangeBegin <= 0) {
       deltaRangeBegin = 1;
     }
-    if (deltaRangeBegin > numberFrames) {
+    if (deltaRangeEnd > numberFrames) {
       deltaRangeEnd = numberFrames;
     }
     for (int i = deltaRangeBegin; i <= deltaRangeEnd; i++) {
@@ -155,16 +156,18 @@ public class falseValuesProcessor implements FalseValuesAnalyzer {
   @Override
   public int getFalsepositives(LinkedList<Pair<Integer, Integer>> gTsceneCuts,
       LinkedList<Boolean> cutsObtained) {
-      int counter = 0;
-      int numberFrames = cutsObtained.size()+1;
-      LinkedList<Integer> cutsGt = this.obtainFramesCuts(gTsceneCuts);
-      LinkedList<Integer> cutsObtainedFromSegTemp = this.getCutsobtained(cutsObtained);
-      for (int i = 0; i < cutsObtainedFromSegTemp.size(); i++){
-        if (this.ismatch(cutsGt, cutsObtainedFromSegTemp.get(i), numberFrames)){
-          counter++;
-        }
+    int counter = 0;
+    int numberFrames = cutsObtained.size() + 1;
+    LinkedList<Integer> cutsGt = this.obtainFramesCuts(gTsceneCuts);
+    LinkedList<Integer> cutsObtainedFromSegTemp = this.getCutsobtained(cutsObtained);
+    System.out.println("CortesGT:" + cutsGt.toString());
+    System.out.println("CortesAnalyzer:" + cutsObtainedFromSegTemp.toString());
+    for (int i = 0; i < cutsObtainedFromSegTemp.size(); i++) {
+      if (this.ismatch(cutsGt, cutsObtainedFromSegTemp.get(i), numberFrames)) {
+        counter++;
       }
-      return counter;
+    }
+    return counter;
   }
 
   /*
@@ -177,16 +180,18 @@ public class falseValuesProcessor implements FalseValuesAnalyzer {
   public int getFalsenegatives(LinkedList<Pair<Integer, Integer>> gTsceneCuts,
       LinkedList<Boolean> cutsObtained) {
     int counter = 0;
-    int numberFrames = cutsObtained.size()+1;
+    int numberFrames = cutsObtained.size() + 1;
     LinkedList<Integer> notCutsGt = this.obtainFramesNotCuts(gTsceneCuts, numberFrames);
-    LinkedList<Integer> notCutsObtainedFromSegTemp = this.getCutsobtained(cutsObtained);
-    for (int i = 0; i < notCutsObtainedFromSegTemp.size(); i++){
-      if (this.ismatch(notCutsGt, notCutsObtainedFromSegTemp.get(i), numberFrames)){
+    LinkedList<Integer> notCutsObtainedFromSegTemp = this.getNotcutsobtained(cutsObtained);
+    System.out.println("NotCortesGT:" + notCutsGt.toString());
+    System.out.println("x");
+    System.out.println("NotCortesObtained:" + notCutsObtainedFromSegTemp.toString());
+    for (int i = 0; i < notCutsObtainedFromSegTemp.size(); i++) {
+      if (this.ismatch(notCutsGt, notCutsObtainedFromSegTemp.get(i), numberFrames)) {
         counter++;
       }
     }
     return counter;
-}
   }
-
 }
+

@@ -88,10 +88,14 @@ public class MainProcessor {
     System.out.println();
     LinkedList<Boolean> cutsArray = cutValidator.obtainCuts(distanceArray);
     Assert.assertTrue(cutsArray.size() == distanceArray.size());
-    // value
-    /*
-     * for (int i = 0; i < cutsArray.size(); i++) { System.out.println(i); }
-     */
+    System.out.print("[");
+    for (int i = 0; i < cutsArray.size(); i++) {
+      if (cutsArray.get(i)) {
+        System.out.print(i + ",");
+      }
+    }
+    System.out.print("]");
+    System.out.println();
     GroundtruthReader lectorGt = new CsvGroundtruthreader();
     LinkedList<Pair<Integer, Integer>> sceneCuts = lectorGt.getAbsolutecuts("groundtruth.csv");
     PrecisionAnalyzer metricAnalyzer = new falseValuesProcessor();

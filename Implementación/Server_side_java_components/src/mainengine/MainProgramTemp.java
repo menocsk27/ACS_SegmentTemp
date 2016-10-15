@@ -18,6 +18,7 @@ public class MainProgramTemp {
    */
   public static void main(String[] args) {
 
+    System.out.println("x");
     MainProcessor program = new MainProcessor();
     program.startMainflow("Dissolve1-15.mp4", null);
 
