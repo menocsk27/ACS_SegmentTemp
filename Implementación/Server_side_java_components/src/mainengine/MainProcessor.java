@@ -1,0 +1,93 @@
+/*
+ * @author Daniel Troyo
+ * 
+ * @version 0.1.0
+ */
+package mainengine;
+
+import java.io.IOException;
+import java.util.LinkedList;
+
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+
+import javafx.util.Pair;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainProcessor. Main class of the program and the one handling the main flow of the
+ * program. Using the interface of the other classes.
+ */
+public class MainProcessor {
+
+  /** The Video Segmenter assign to the treatment of video files and image processing.. */
+  private static VideoSegmenter vidProc;
+
+  /** The Processor of histograms and all the operations related. */
+  private static HistogramProcessor histProc;
+
+  /**
+   * The instance assign with the tasks of verifying if there's a cut between two frames based on
+   * the distance between the histograms of the frames.
+   */
+  private static UmbralizationProcessor cutValidator;
+
+  /**
+   * The instance assign with the tasks of obtaining the distance between the frames of the video.
+   */
+  private static DistanceHistogramGenerator distanceObtainer;
+
+  /**
+   * Sets the environment for the class, initializing its attributes.
+   */
+  private void setEnvironment() {
+    vidProc = new VideoSegmenter();
+    histProc = new HistogramProcessor();
+    cutValidator = new ThreeSigmaUmbralizator();
+    distanceObtainer = new BhattacharyyaHandler();
+  }
+
+  /**
+   * Instantiates a new main processor.
+   */
+  public MainProcessor() {
+    setEnvironment();
+  }
+
+
+
+  /**
+   * Function that receives the local route to a video file and local route to a csv groundTruth
+   * file. It starts the main time video segmentation and displays the results or comparisons with
+   * the ground truth file. The ground truth file must be a four column file containing: Initial
+   * frame of the cut in the first column Last frame of the cut in the second column Type of the
+   * event. Not used in the segmentation nor the ground truth comparison. Type of the cut. Not used
+   * in the segmentation nor the ground truth comparison. The function only accepts avi or mp4 video
+   * files.
+   * 
+   * @param videoRoute Route to a local video file.
+   * @param groundTruth the ground truth
+   * @return Boolean saying if a route to a video file is valid.
+   * @throws IOException
+   */
+  public boolean startMainflow(String videoRoute, String groundTruth)
+      throws IOException, IllegalArgumentException {
+    System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    // Obtengo frames hsv del video los guardo en el frames
+    LinkedList<Mat> frames = vidProc.splitVideosToHSV(videoRoute);
+    // Obtengo los histogramas de la capa H de cada frame
+    LinkedList<Mat> histogramList = histProc.calculateHistoOfHueVideo(frames);
+    // histProc.drawHistogram(histogramList.get(0), "Histograma normalizado.png", 300, 300);
+    LinkedList<Double> distanceArray = distanceObtainer.generateDistanceArray(histogramList);
+    LinkedList<Boolean> cutsArray = cutValidator.obtainCuts(distanceArray);
+    GroundtruthReader lectorGt = new CsvGroundtruthreader();
+    LinkedList<Pair<Integer, Integer>> sceneCuts = lectorGt.getAbsolutecuts("groundtruth.csv");
+    PrecisionAnalyzer metricAnalyzer = new falseValuesProcessor();
+    System.out
+        .println("Falsos positivos: " + metricAnalyzer.getFalsepositives(sceneCuts, cutsArray));
+    System.out
+        .println("Falsos negativos: " + metricAnalyzer.getFalsenegatives(sceneCuts, cutsArray));
+    return true;
+  }
+}
+

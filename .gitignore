@@ -1,1 +1,4 @@
 /bin/
+.metadata/
+.recommenders/
+Implementación/Server_side_java_components/src/mainengine/MyWebSocketHandler.java
