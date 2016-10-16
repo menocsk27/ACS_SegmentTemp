@@ -5,6 +5,7 @@
  */
 package mainengine;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 import org.junit.Assert;
@@ -68,13 +69,14 @@ public class MainProcessor {
    * @param videoRoute Route to a local video file.
    * @param groundTruth the ground truth
    * @return Boolean saying if a route to a video file is valid.
+   * @throws IOException
    */
-  public boolean startMainflow(String videoRoute, String groundTruth) {
+  public boolean startMainflow(String videoRoute, String groundTruth)
+      throws IOException, IllegalArgumentException {
     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     // Obtengo frames hsv del video los guardo en el frames
     LinkedList<Mat> frames = vidProc.split_video_to_frames_hsv(videoRoute);
     Assert.assertTrue(frames.size() > 15);
-    System.out.println(frames.get(1).rows());
     // Obtengo los histogramas de la capa H de cada frame
     LinkedList<Mat> histogramList = histProc.calculateHistoOfHueVideo(frames);
     Assert.assertTrue(histogramList.size() > 15);

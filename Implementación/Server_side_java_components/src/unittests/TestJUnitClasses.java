@@ -1,11 +1,19 @@
+/*
+ * @author Daniel Troyo
+ * 
+ * @version 0.1.0
+ */
 package unittests;
 
-import org.junit.runner.*;
+import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+/**
+ * The Class TestJUnitClasses.
+ */
 @RunWith(Suite.class)
 
-@Suite.SuiteClasses({Testjunit0.class, Testjunit1.class})
+@Suite.SuiteClasses({TestSet1.class, TestSet2.class})
 
 public class TestJUnitClasses {
 }

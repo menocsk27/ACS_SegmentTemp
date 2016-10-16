@@ -5,6 +5,8 @@
  */
 package mainengine;
 
+import java.io.IOException;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class MainProgramTemp.
@@ -20,7 +22,12 @@ public class MainProgramTemp {
 
     System.out.println("x");
     MainProcessor program = new MainProcessor();
-    program.startMainflow("Dissolve1-15.mp4", null);
+    try {
+      program.startMainflow("Dissolve1-15.mp4", null);
+    } catch (IllegalArgumentException | IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
   }
 

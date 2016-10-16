@@ -1,5 +1,6 @@
 /*
- * 
+ * @author Daniel Troyo
+ * @version 0.1.0
  */
 package unittests;
 
