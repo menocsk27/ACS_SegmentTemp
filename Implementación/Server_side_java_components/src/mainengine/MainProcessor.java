@@ -8,7 +8,6 @@ package mainengine;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import org.junit.Assert;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
@@ -75,30 +74,12 @@ public class MainProcessor {
       throws IOException, IllegalArgumentException {
     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     // Obtengo frames hsv del video los guardo en el frames
-    LinkedList<Mat> frames = vidProc.split_video_to_frames_hsv(videoRoute);
-    Assert.assertTrue(frames.size() > 15);
+    LinkedList<Mat> frames = vidProc.splitVideosToHSV(videoRoute);
     // Obtengo los histogramas de la capa H de cada frame
     LinkedList<Mat> histogramList = histProc.calculateHistoOfHueVideo(frames);
-    Assert.assertTrue(histogramList.size() > 15);
     // histProc.drawHistogram(histogramList.get(0), "Histograma normalizado.png", 300, 300);
     LinkedList<Double> distanceArray = distanceObtainer.generateDistanceArray(histogramList);
-    Assert.assertTrue(distanceArray.size() == histogramList.size() - 1);
-    System.out.print("[");
-    for (int i = 0; i < distanceArray.size(); i++) {
-      System.out.print(distanceArray.get(i) + ",");
-    }
-    System.out.print("]");
-    System.out.println();
     LinkedList<Boolean> cutsArray = cutValidator.obtainCuts(distanceArray);
-    Assert.assertTrue(cutsArray.size() == distanceArray.size());
-    System.out.print("[");
-    for (int i = 0; i < cutsArray.size(); i++) {
-      if (cutsArray.get(i)) {
-        System.out.print(i + ",");
-      }
-    }
-    System.out.print("]");
-    System.out.println();
     GroundtruthReader lectorGt = new CsvGroundtruthreader();
     LinkedList<Pair<Integer, Integer>> sceneCuts = lectorGt.getAbsolutecuts("groundtruth.csv");
     PrecisionAnalyzer metricAnalyzer = new falseValuesProcessor();

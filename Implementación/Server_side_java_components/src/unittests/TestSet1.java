@@ -18,12 +18,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.opencv.core.Mat;
 
-import mainengine.BhattacharyyaHandler;
-import mainengine.DistanceHistogramGenerator;
-import mainengine.HistogramProcessor;
-import mainengine.MainProcessor;
-import mainengine.ThreeSigmaUmbralizator;
-import mainengine.UmbralizationProcessor;
 import mainengine.VideoSegmenter;
 
 // TODO: Auto-generated Javadoc
@@ -37,23 +31,8 @@ public class TestSet1 {
   /** The video route. */
   private String videoRoute;
 
-  /** The test junit test. */
-  private static MainProcessor testJunitTest = new MainProcessor();
-
-  /** The expected result. */
-  private boolean expectedResult;
-
   /** The vid proc test. */
   private static VideoSegmenter vidProcTest = new VideoSegmenter();
-
-  /** The hist proc test. */
-  private static HistogramProcessor histProcTest = new HistogramProcessor();
-
-  /** The cut validator test. */
-  private static UmbralizationProcessor cutValidatorTest = new ThreeSigmaUmbralizator();
-
-  /** The distance obtainer test. */
-  private static DistanceHistogramGenerator distanceObtainerTest = new BhattacharyyaHandler();
 
 
 
@@ -62,15 +41,9 @@ public class TestSet1 {
   // from parameters we defined in primeNumbers() method
 
 
-  /**
-   * Instantiates a new testjunit 0.
-   *
-   * @param videoRoute the video route
-   * @param expectedresult the expectedresult
-   */
-  public TestSet1(String videoRoute, boolean expectedresult) {
+
+  public TestSet1(String videoRoute) {
     this.videoRoute = videoRoute;
-    this.expectedResult = expectedResult;
   }
 
 
@@ -102,7 +75,7 @@ public class TestSet1 {
   @Test
   public void validateCorrectReadingOfVideo() {
     try {
-      LinkedList<Mat> frames = vidProcTest.split_video_to_frames_hsv(videoRoute);
+      LinkedList<Mat> frames = vidProcTest.splitVideosToHSV(this.videoRoute);
       LinkedList<Integer> resVideo = vidProcTest.obtainResOfLastVideoRead();
       int widthFrame = frames.get(1).cols();
       int heightFrame = frames.get(1).rows();
@@ -113,9 +86,6 @@ public class TestSet1 {
       e.printStackTrace();
     }
   }
-
-  // @Test
-  // public void
 
 
 

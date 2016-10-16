@@ -53,13 +53,7 @@ public class TestSet2 {
     return list;
   }
 
-  /**
-   * Instantiates a new testjunit 1.
-   *
-   * @param parameter the parameter
-   * @param expectedResultStdDev the expected result std dev
-   * @param expectedResultAvg the expected result avg
-   */
+
   public TestSet2(LinkedList<Double> parameter, double expectedResultStdDev,
       double expectedResultAvg) {
     this.parameter = parameter;
@@ -111,7 +105,7 @@ public class TestSet2 {
   }
 
   /**
-   * Test 3. It compares the returned average to the expected value.
+   * Test 4. It compares the returned average to the expected value.
    */
   @SuppressWarnings("deprecation")
   @Test

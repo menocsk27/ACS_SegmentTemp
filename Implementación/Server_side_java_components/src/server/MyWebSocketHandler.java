@@ -81,9 +81,11 @@ public class MyWebSocketHandler {
    * 
    * @param message Parameter given by the socket class, not given by code. Contains the message
    *        received by the client.
+   * @throws IOException
+   * @throws IllegalArgumentException
    */
   @OnWebSocketMessage
-  public void onMessage(String message) {
+  public void onMessage(String message) throws IllegalArgumentException, IOException {
     String type = message.substring(message.length() - 3);
     System.out.println("Message: " + message);
     if (type.equals("mp4") || type.equals("avi")) {
@@ -125,10 +127,14 @@ public class MyWebSocketHandler {
    *        comparison. The function only accepts avi or mp4 video files.
    * 
    * @return A collection of file routes of the scenes obtained from the segmentation.
+   * @throws IOException
+   * @throws IllegalArgumentException
    */
-  private ArrayList<String> notify(String videoRoute, String groundTruth) {
+  private ArrayList<String> notify(String videoRoute, String groundTruth)
+      throws IllegalArgumentException, IOException {
+    observer.startMainflow(videoRoute, groundTruth);
     return null;
-    // return observer.validate(videoRoute, groundTruth);
+    // return observer.startMainflow(videoRoute, groundTruth);
     // return new ArrayList<String>(Arrays.asList("assets/temp/Dissolve1-15.mp4",
     // "assets/temp/Dissolve1-15.mp4", "assets/temp/Dissolve1-15.mp4"));
   }

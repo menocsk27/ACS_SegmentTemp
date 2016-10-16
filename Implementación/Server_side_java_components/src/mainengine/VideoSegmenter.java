@@ -100,7 +100,7 @@ public class VideoSegmenter {
    * @return List of all the HSV files made from all the frames of the video.
    * @throws IOException En caso que el formato de video no sea el correcto.
    */
-  public LinkedList<Mat> split_video_to_frames_hsv(String filename) throws IOException {
+  public LinkedList<Mat> splitVideosToHSV(String filename) throws IOException {
     if (!filename.contains(".mp4") && !filename.contains(".avi")) {
       throw new IOException("Archivo de video debe ser mp4 o avi.");
     }
