@@ -16,7 +16,7 @@ public interface StadisticalCalculator {
 
 
   /**
-   * This function returns the average of a collection of decimal values passed as a LinkedList
+   * This function returns the average of a collection of decimal values passed as a LinkedList.
    *
    * @param set Collection of decimal values.
    * @return The average value of the set passed as parameter.
@@ -25,7 +25,7 @@ public interface StadisticalCalculator {
 
   /**
    * This function returns the standard deviation of a collection of decimal values passed as a
-   * LinkedList
+   * LinkedList.
    *
    * @param set Collection of decimal values.
    * @return The standard deviation value of the set passed as parameter.

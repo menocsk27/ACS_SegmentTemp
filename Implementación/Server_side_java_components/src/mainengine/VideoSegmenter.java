@@ -18,6 +18,7 @@ import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class VideoSegmenter.
  */
@@ -27,7 +28,7 @@ public class VideoSegmenter {
   private final int hsvScale = Imgproc.COLOR_BGR2HSV;
 
   /** The width video code. */
-  private static int widthVideoCode = Videoio.CV_CAP_PROP_FRAME_HEIGHT;
+  private static int widthVideoCode = Videoio.CV_CAP_PROP_FRAME_WIDTH;
 
   /** The heigh video code. */
   private static int heighVideoCode = Videoio.CV_CAP_PROP_FRAME_HEIGHT;
@@ -77,6 +78,7 @@ public class VideoSegmenter {
     heightLastVideoRead = reader.get(heighVideoCode);
     fpsLastVideoRead = reader.get(fpsVideoCode);
     fourCCVideoRead = reader.get(fourccVideoCode);
+
     if (fpsLastVideoRead < 1) {
       fpsLastVideoRead = 24;
     }

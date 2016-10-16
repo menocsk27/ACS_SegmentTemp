@@ -74,6 +74,7 @@ public class MainProcessor {
     // Obtengo frames hsv del video los guardo en el frames
     LinkedList<Mat> frames = vidProc.split_video_to_frames_hsv(videoRoute);
     Assert.assertTrue(frames.size() > 15);
+    System.out.println(frames.get(1).rows());
     // Obtengo los histogramas de la capa H de cada frame
     LinkedList<Mat> histogramList = histProc.calculateHistoOfHueVideo(frames);
     Assert.assertTrue(histogramList.size() > 15);

@@ -164,6 +164,8 @@ public class falseValuesProcessor implements PrecisionAnalyzer {
     System.out.println("CortesAnalyzer:" + cutsObtainedFromSegTemp.toString());
     for (int i = 0; i < cutsObtainedFromSegTemp.size(); i++) {
       if (this.ismatch(cutsGt, cutsObtainedFromSegTemp.get(i), numberFrames)) {
+        
+      }else{
         counter++;
       }
     }
@@ -185,9 +187,13 @@ public class falseValuesProcessor implements PrecisionAnalyzer {
     LinkedList<Integer> notCutsObtainedFromSegTemp = this.getNotcutsobtained(cutsObtained);
     System.out.println("NotCortesGT:" + notCutsGt.toString());
     System.out.println("x");
-    System.out.println("NotCortesObtained:" + notCutsObtainedFromSegTemp.toString());
+    System.out.println("NotCortesObtained:" + notCutsObtainedFromSegTemp.get(45));
+    System.out.println("Número de negativos obtenidos:  "+notCutsObtainedFromSegTemp.size());
     for (int i = 0; i < notCutsObtainedFromSegTemp.size(); i++) {
+      
       if (this.ismatch(notCutsGt, notCutsObtainedFromSegTemp.get(i), numberFrames)) {
+        
+      }else{
         counter++;
       }
     }

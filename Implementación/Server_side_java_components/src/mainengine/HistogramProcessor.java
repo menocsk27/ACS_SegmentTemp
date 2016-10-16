@@ -54,11 +54,11 @@ public class HistogramProcessor {
    * Splits a frame passed as parameter into three channels and returns the first one of these,
    * being the hue channel MAT object.
    *
+   * @param frameHSV The Mat object that represents the frame passed as parameter.
+   * @return The MAT object that represents the HUE channel of the frame passed as parameter
    * @see <a href=
    *      "http://docs.opencv.org/2.4.13/doc/tutorials/core/mat_the_basic_image_container/mat_the_basic_image_container.html?highlight=mat">
    *      MAT Object - Official Doc</a>
-   * @param frameHSV The Mat object that represents the frame passed as parameter.
-   * @return The MAT object that represents the HUE channel of the frame passed as parameter
    */
   private Mat obtainHchannel(Mat frameHSV) {
     LinkedList<Mat> channelsImage = new LinkedList<Mat>();
