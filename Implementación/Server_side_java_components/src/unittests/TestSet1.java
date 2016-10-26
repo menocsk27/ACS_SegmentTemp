@@ -22,7 +22,8 @@ import mainengine.VideoSegmenter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Testjunit0.
+ * The Class TestSet1. This class contains a set of unitary tests. It does not belongs to the public
+ * API of the project.
  */
 @RunWith(Parameterized.class)
 

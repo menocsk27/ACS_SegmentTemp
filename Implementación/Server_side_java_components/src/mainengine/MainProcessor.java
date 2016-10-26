@@ -65,14 +65,22 @@ public class MainProcessor {
    * in the segmentation nor the ground truth comparison. The function only accepts avi or mp4 video
    * files.
    * 
-   * @param videoRoute Route to a local video file.
-   * @param groundTruth the ground truth
-   * @return Boolean saying if a route to a video file is valid.
-   * @throws IOException
+   * @param videoRoute Route to a local video file. If it isn't a video file, the whole segmentation
+   *        will give erroneous results if it isn't stopped at the segmentation of this video.
+   * @param groundTruth the grou0nd truth. If this file contains not numerical values in the first
+   *        two columns or values, the lecture of the file will evoke in an error. If the file
+   *        contains numerical values outside of the video context, such as negatives or floating
+   *        points values, the false positives and negatives will augment substantially and they
+   *        will no longer represent a valid metric for the precision of the system.
+   * 
+   * @return Boolean saying if the process completes successfully.
+   * @throws IOException Error in the reading of the csv file or the video file
+   * @throws IllegalArgumentException The values located in the ground truth csv file are not in the
+   *         correct format.
    */
   public boolean startMainflow(String videoRoute, String groundTruth)
       throws IOException, IllegalArgumentException {
-    System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    System.loadLibrary(Core.NATIVE_LIBRARY_NAME); // Carga la librería
     // Obtengo frames hsv del video los guardo en el frames
     LinkedList<Mat> frames = vidProc.splitVideosToHSV(videoRoute);
     // Obtengo los histogramas de la capa H de cada frame

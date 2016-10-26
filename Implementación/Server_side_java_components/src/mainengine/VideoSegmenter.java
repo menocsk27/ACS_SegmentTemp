@@ -94,11 +94,15 @@ public class VideoSegmenter {
 
   /**
    * Function that obtains hsv frames represented as MAT Objects from the video sent to it as
-   * parameter.
+   * parameter. Valid parameters should be a video that can be split in BGR MAT objects. The video
+   * should be in a valid format, such as avi or mp4. Otherwise, the integrity of the frames
+   * obtained is not guaranteed.
    *
-   * @param filename String directing to the location of the video file.
-   * @return List of all the HSV files made from all the frames of the video.
-   * @throws IOException En caso que el formato de video no sea el correcto.
+   * @param filename String directing to the location of the video file. This videofile should be in
+   *        .avi or .mp4 format and must be splitted into bgr frames.
+   * @return List of all the HSV files made from all the frames of the video. These HSV frames
+   *         consist of pixels of three channels each, being the first one [0,360].
+   * @throws IOException If the video file format is not correct.
    */
   public LinkedList<Mat> splitVideosToHSV(String filename) throws IOException {
     if (!filename.contains(".mp4") && !filename.contains(".avi")) {
@@ -126,11 +130,12 @@ public class VideoSegmenter {
 
   /**
    * Creates the a video file from a set of frames. It creates the file in the root folder of the
-   * project.
-   *
+   * project. TO FIX
+   * 
    * @param frames Set of frames/MAT Objects.
    * @param filename The name of the file, including its extension (.avi preferred).
    */
+
   public void createVideofromframes(LinkedList<Mat> frames, String filename) {
     VideoWriter writer;
     Highgui.imwrite("imagen.jpg", frames.get(0));
@@ -150,7 +155,10 @@ public class VideoSegmenter {
   }
 
   /**
-   * Obtains the array of scenes (array of frames) based on the position of each cut.
+   * Obtains the array of scenes (array of frames) based on the position of each cut. The cutPos
+   * array must contain integer values higher than zero and lower than the total number of frames.
+   * Otherwise, the division of the scenes will be uncomplete. The frames array should contain the
+   * frames originally obtained from splitting the video of the soccer game.
    * 
    * @param frames The total array of frames originally obtained at the beginning of the program.
    * @param cutsPos It has len = frames.len() -1 . Array of cuts between frame t and frame t+1.
@@ -207,7 +215,8 @@ public class VideoSegmenter {
 
   /**
    * This function returns the resolution (Width, then Height) as a collection of two integer
-   * values.
+   * values. If the Mat Object passed as parameter is not from an image, the values returned in the
+   * collection should be non-bidimensional, like such existing in a histogram MAT object.
    *
    * @return Collection containing two integer values of the last video read. The first element is
    *         the width (# of pixels). The second one is the height.

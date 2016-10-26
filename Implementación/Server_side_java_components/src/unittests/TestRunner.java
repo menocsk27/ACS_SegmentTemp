@@ -1,5 +1,6 @@
 /*
  * @author Daniel Troyo
+ * 
  * @version 0.1.0
  */
 package unittests;
@@ -12,10 +13,11 @@ import org.junit.runner.notification.Failure;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TestRunner.
+ * The Class TestRunner. This class contains an interface for executing the unitary tests. It does
+ * not belongs to the public API of the project.
  */
 public class TestRunner {
-  
+
   /**
    * The main method.
    *

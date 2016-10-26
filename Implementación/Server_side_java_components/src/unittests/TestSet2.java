@@ -19,7 +19,8 @@ import mainengine.StadisticalCalculator;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TestSet2.
+ * The Class TestSet2. This class contains a set of unitary tests. It does not belongs to the public
+ * API of the project.
  */
 @RunWith(Parameterized.class)
 

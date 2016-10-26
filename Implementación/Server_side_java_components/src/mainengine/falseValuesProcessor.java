@@ -46,7 +46,7 @@ public class falseValuesProcessor implements PrecisionAnalyzer {
    * @param gTsceneCuts Ground truth scenes passed as ranges of frames.
    * @param numberFrames The total number of frames of the video, obtained from adding 1 to the
    *        number of elements in the dissimilitude collection
-   * @return A collection of the number of the frames that are not considered cuts
+   * @return A collection of the number of the frames that are not considered cuts.
    */
   private LinkedList<Integer> obtainFramesNotCuts(LinkedList<Pair<Integer, Integer>> gTsceneCuts,
       int numberFrames) {
@@ -164,8 +164,8 @@ public class falseValuesProcessor implements PrecisionAnalyzer {
     System.out.println("CortesAnalyzer:" + cutsObtainedFromSegTemp.toString());
     for (int i = 0; i < cutsObtainedFromSegTemp.size(); i++) {
       if (this.ismatch(cutsGt, cutsObtainedFromSegTemp.get(i), numberFrames)) {
-        
-      }else{
+
+      } else {
         counter++;
       }
     }
@@ -188,12 +188,12 @@ public class falseValuesProcessor implements PrecisionAnalyzer {
     System.out.println("NotCortesGT:" + notCutsGt.toString());
     System.out.println("x");
     System.out.println("NotCortesObtained:" + notCutsObtainedFromSegTemp.get(45));
-    System.out.println("Número de negativos obtenidos:  "+notCutsObtainedFromSegTemp.size());
+    System.out.println("Número de negativos obtenidos:  " + notCutsObtainedFromSegTemp.size());
     for (int i = 0; i < notCutsObtainedFromSegTemp.size(); i++) {
-      
+
       if (this.ismatch(notCutsGt, notCutsObtainedFromSegTemp.get(i), numberFrames)) {
-        
-      }else{
+
+      } else {
         counter++;
       }
     }

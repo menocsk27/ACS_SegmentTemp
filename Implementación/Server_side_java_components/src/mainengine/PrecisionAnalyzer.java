@@ -24,7 +24,7 @@ public interface PrecisionAnalyzer {
    *
    * @param gTsceneCuts Collection of tuples of the range of frames of the cuts. Being that the
    *        beginning of a scene cut and the end of the scene cut. All the frames located in this
-   *        range should be considered as frames.
+   *        range should be considered as cuts.
    * @param cutsObtained Plain collection of boolean values that represent the existence of a cut
    *        between two frames. If the ith value of this collection is true, this would represent a
    *        cut between the ith cut and the i+1th cut.

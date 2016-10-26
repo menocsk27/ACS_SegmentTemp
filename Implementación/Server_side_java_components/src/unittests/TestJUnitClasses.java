@@ -9,7 +9,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
- * The Class TestJUnitClasses.
+ * The Class TestJUnitClasses. Main connector of the . It does not belongs to the public API of the
+ * project.
  */
 @RunWith(Suite.class)
 
