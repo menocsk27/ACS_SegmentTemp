@@ -117,7 +117,7 @@ public class HistogramProcessor {
       normHueHist.put(i, 0, valTemp); // Queda [0,1]
       valorSuma += normHueHist.get(i, 0)[0];
     }
-    //System.out.println("Suma Histograma normalizado:" + valorSuma);
+    // System.out.println("Suma Histograma normalizado:" + valorSuma);
     return normHueHist;
   }
 
@@ -142,6 +142,10 @@ public class HistogramProcessor {
     Imgproc.calcHist(hValueframe, histChannels, new Mat(), histogramH, histSize, histRange, false);
     // this.drawHistogram(histogramH, "histograma.jpg", 300, 400);
     histogramH = normHistHueChannel(histogramH, capaHnormalized.total());
+    for (int i = 0; i < hValueframe.size(); i++) {
+      hValueframe.get(i).release();
+    }
+    capaHnormalized.release();
     return histogramH;
   }
 

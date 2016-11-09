@@ -31,7 +31,7 @@ public class VideoSegmenter {
   /** The width video code. */
   private static int widthVideoCode = Videoio.CV_CAP_PROP_FRAME_WIDTH;
 
-  /** The heigh video code. */
+  /** The height video code. */
   private static int heighVideoCode = Videoio.CV_CAP_PROP_FRAME_HEIGHT;
 
   /** The fps video code. */

@@ -91,6 +91,12 @@ public class MainProcessor {
     GroundtruthReader lectorGt = new CsvGroundtruthreader();
     LinkedList<Pair<Integer, Integer>> sceneCuts = lectorGt.getAbsolutecuts("groundtruth.csv");
     PrecisionAnalyzer metricAnalyzer = new falseValuesProcessor();
+    for (int i = 0; i < frames.size(); i++) {
+      frames.get(i).release();
+    }
+    for (int j = 0; j < histogramList.size(); j++) {
+      histogramList.get(j).release();
+    }
     System.out
         .println("Falsos positivos: " + metricAnalyzer.getFalsepositives(sceneCuts, cutsArray));
     System.out

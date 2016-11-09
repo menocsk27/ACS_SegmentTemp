@@ -17,7 +17,7 @@ import org.opencv.core.Mat;
  */
 public class BhattacharyyaHandler implements DistanceHistogramGenerator {
 
-  /**  The calculator that. */
+  /** The calculator that. */
   private StadisticalCalculator calculator = new NumericalDataCalculator();
 
   /**
@@ -123,7 +123,6 @@ public class BhattacharyyaHandler implements DistanceHistogramGenerator {
 
       distanceHist.add(distanceCycle);
     }
-
     return distanceHist;
   }
 
