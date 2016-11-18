@@ -45,4 +45,37 @@
     </video>
   </div>
 
+    <div class="gtResultsDiv" id="gtResultsDiv">
+
+      <div class="ui label">
+        <i class="bar chart icon"></i> Results
+      </div><br>
+      
+      <div ng-hide="showResultsBoolean">
+      <br><label class="title" >No results generated yet.</label><br>
+      </div>
+
+      <div class ="results" ng-show="showResultsBoolean">
+        <br>
+        
+        <div class="ui label">
+          <i class="check circle icon"></i> 
+          <label class="pf">Positive Falses</label><br>
+        </div>
+        <label class="pfr" id="pfr"></label><br>
+
+        <div class="ui label">
+          <i class="remove circle icon"></i> 
+          <label class="nf">Negative Falses</label><br>
+        </div>
+        <label class="nfr" id="nfr"></label><br>
+        
+        
+      </div>
+    </div>
+    
+
+
+
+  </div>
 </div>

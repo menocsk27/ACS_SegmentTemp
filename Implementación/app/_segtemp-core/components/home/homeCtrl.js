@@ -7,6 +7,9 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
   var validVidFiles = ["mp4", "avi"]
   var validGTFiles = ["txt", "xml", "csv", "json", "yaml"]
 
+  $scope.showResultsBoolean = false; 
+  $scope.msg_recibido = "";
+
   $scope.validFile = function(validList, extToCheck) {
     for (i in validList) {
       if (validList[i] == extToCheck) {
@@ -40,6 +43,8 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
             'error');
       }
     }
+
+
   };
 
   $scope.uploadGT = function(file){
@@ -65,6 +70,7 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
     }
   };
 
+
   $scope.startTSA = function(){
     if(videoUploaded){
       if ("WebSocket" in window){
@@ -83,7 +89,16 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
         };
         
         ws.onmessage = function (evt){ 
-          var msg_recibido = evt.data;
+          $scope.msg_recibido = evt.data;
+
+          var gtstr = $scope.msg_recibido;
+          if (gtstr != "") {
+            var res = gtstr.split(",");
+            document.getElementById("pfr").innerHTML = res[0];
+            document.getElementById("nfr").innerHTML = res[1];
+      
+            $scope.showResultsBoolean = true;
+          }
           //Aqui se mandaria la direccion con los nuevos videos.
           alert("Mensaje recibido: " + msg_recibido);
           document.getElementById("videosDiv").innerHTML += '<video width="500" controls><source src="' + msg_recibido + '" type="video/mp4">Your browser does not support HTML5 video.</video>';
