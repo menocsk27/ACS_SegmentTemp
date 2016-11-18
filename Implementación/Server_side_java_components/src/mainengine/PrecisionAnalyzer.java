@@ -50,4 +50,16 @@ public interface PrecisionAnalyzer {
    */
   public int getFalsenegatives(LinkedList<Pair<Integer, Integer>> gTsceneCuts,
       LinkedList<Boolean> cutsObtained);
+
+  /**
+   * This function returns the ranges of the cuts obtained by the analyzer, which are going to be
+   * stored inside the file to be sent to the client.
+   *
+   * @param cutsObtained Plain collection of boolean values that represent the existence of a cut
+   *        between two frames. If the ith value of this collection is true, this would represent a
+   *        cut between the ith cut and the i+1th cut.
+   * @return A list of ranges, represented by pair of integers, which can tell the initial frame of
+   *         a cut and the last frame of it.
+   */
+  public LinkedList<Pair<Integer, Integer>> getCutsScenes(LinkedList<Boolean> cutsObtained);
 }

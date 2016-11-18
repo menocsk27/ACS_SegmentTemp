@@ -37,6 +37,9 @@ public class MainProcessor {
    */
   private static DistanceHistogramGenerator distanceObtainer;
 
+
+  private static String routeGroundTruthGenerator = "cutsObtainedByAnalyzer.csv";
+
   /**
    * Sets the environment for the class, initializing its attributes.
    */
@@ -89,7 +92,7 @@ public class MainProcessor {
     LinkedList<Double> distanceArray = distanceObtainer.generateDistanceArray(histogramList);
     LinkedList<Boolean> cutsArray = cutValidator.obtainCuts(distanceArray);
     GroundtruthReader lectorGt = new CsvGroundtruthreader();
-    LinkedList<Pair<Integer, Integer>> sceneCuts = lectorGt.getAbsolutecuts("groundtruth.csv");
+    LinkedList<Pair<Integer, Integer>> sceneCuts = lectorGt.getAbsolutecuts(groundTruth);
     PrecisionAnalyzer metricAnalyzer = new falseValuesProcessor();
     for (int i = 0; i < frames.size(); i++) {
       frames.get(i).release();
@@ -101,6 +104,14 @@ public class MainProcessor {
         .println("Falsos positivos: " + metricAnalyzer.getFalsepositives(sceneCuts, cutsArray));
     System.out
         .println("Falsos negativos: " + metricAnalyzer.getFalsenegatives(sceneCuts, cutsArray));
+
+    GroundTruthWriter gtGenerator = new CsvGroundtruthwriter();
+    LinkedList<Pair<Integer, Integer>> cutsToGTfile = metricAnalyzer.getCutsScenes(cutsArray);
+
+    gtGenerator.writeGroundTruth(routeGroundTruthGenerator, cutsToGTfile);
+
+
+
     return true;
   }
 }

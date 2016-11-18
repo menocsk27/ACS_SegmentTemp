@@ -23,6 +23,7 @@ import org.opencv.videoio.Videoio;
 /**
  * The Class VideoSegmenter.
  */
+
 public class VideoSegmenter {
 
   /** The hsv scale. */

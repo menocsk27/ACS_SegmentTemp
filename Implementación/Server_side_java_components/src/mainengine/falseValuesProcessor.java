@@ -26,7 +26,7 @@ public class falseValuesProcessor implements PrecisionAnalyzer {
    * @param gTsceneCuts Ground truth scenes passed as ranges of frames.
    * @return A collection of the number of the frames that are not considered cuts
    */
-  private LinkedList<Integer> obtainFramesCuts(LinkedList<Pair<Integer, Integer>> gTsceneCuts) {
+  public LinkedList<Integer> obtainFramesCuts(LinkedList<Pair<Integer, Integer>> gTsceneCuts) {
     LinkedList<Integer> cutFrames = new LinkedList<Integer>();
     int beginFrameCutScene, endFrameCutScene;
     for (int i = 0; i < gTsceneCuts.size(); i++) {
@@ -199,5 +199,43 @@ public class falseValuesProcessor implements PrecisionAnalyzer {
     }
     return counter;
   }
+
+  @Override
+  public LinkedList<Pair<Integer, Integer>> getCutsScenes(LinkedList<Boolean> cutsObtained) {
+    int counterInitialFrame = 0, counterLastFrame = 0;
+    LinkedList<Pair<Integer, Integer>> cutsRanges = new LinkedList<Pair<Integer, Integer>>();
+    Pair<Integer, Integer> currentCut;
+
+    boolean areWeInsideACut = false;
+
+    for (int i = 0; i < cutsObtained.size(); i++) {
+      if (cutsObtained.get(i) == true && areWeInsideACut == false) {
+        // Es un corte
+        counterInitialFrame = i;
+        areWeInsideACut = true;
+        continue;
+      } else if (cutsObtained.get(i) == false && areWeInsideACut == false) {
+        continue;
+      } else if (cutsObtained.get(i) == false && areWeInsideACut == true) {
+
+        areWeInsideACut = false;
+        cutsRanges.add(new Pair<Integer, Integer>(counterInitialFrame + 1, counterLastFrame + 1));
+        continue;
+      } else if (cutsObtained.get(i) == true && areWeInsideACut == true) {
+        if (i + 1 == cutsObtained.size()) { // Es el último
+          counterLastFrame = i;
+          areWeInsideACut = false;
+          cutsRanges.add(new Pair<Integer, Integer>(counterInitialFrame + 1, counterLastFrame + 1));
+          continue;
+        }
+        counterLastFrame = i;
+        continue;
+
+      }
+    }
+    System.out.println("Cortes añadidos: " + cutsRanges.size());
+    return cutsRanges;
+  }
 }
+
 

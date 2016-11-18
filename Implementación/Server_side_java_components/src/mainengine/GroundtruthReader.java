@@ -11,7 +11,6 @@ import java.util.LinkedList;
 
 import javafx.util.Pair;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface GroundtruthReader.
  */
