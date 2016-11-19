@@ -90,18 +90,20 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
         
         ws.onmessage = function (evt){ 
           $scope.msg_recibido = evt.data;
-
           var gtstr = $scope.msg_recibido;
           if (gtstr != "") {
             var res = gtstr.split(",");
+
+            document.getElementById("results").innerHTML += '<div class="ui label"><i class="check circle icon"></i><label class="pf">Positive Falses</label><br></div><label class="pfr" id="pfr">' + res[0] + '</label><br>   <div class="ui label"><i class="remove circle icon"></i><label class="nf">Negative Falses</label><br></div><label class="nfr" id="nfr">' + res[1] + '</label><br>';
+
             document.getElementById("pfr").innerHTML = res[0];
             document.getElementById("nfr").innerHTML = res[1];
       
             $scope.showResultsBoolean = true;
           }
           //Aqui se mandaria la direccion con los nuevos videos.
-          alert("Mensaje recibido: " + msg_recibido);
-          document.getElementById("videosDiv").innerHTML += '<video width="500" controls><source src="' + msg_recibido + '" type="video/mp4">Your browser does not support HTML5 video.</video>';
+          //alert("Mensaje recibido: " + msg_recibido);
+          //document.getElementById("videosDiv").innerHTML += '<video width="500" controls><source src="' + msg_recibido + '" type="video/mp4">Your browser does not support HTML5 video.</video>';
         };       
         
         ws.onclose = function(){
