@@ -6,7 +6,6 @@
 package server;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
@@ -30,8 +29,8 @@ public class MyWebSocketHandler {
   /** The session. */
   private Session session;
 
-  /** The videos. */
-  private ArrayList<String> videos = new ArrayList<>();
+  /** The accuracy metrics. */
+  private String metrics;
 
   /** The ground truth. */
   private String groundTruth = "404";
@@ -42,8 +41,10 @@ public class MyWebSocketHandler {
   /**
    * On close.
    *
-   * @param statusCode the status code
-   * @param reason the reason
+   * @param statusCode
+   *          the status code
+   * @param reason
+   *          the reason
    */
   @OnWebSocketClose
   public void onClose(int statusCode, String reason) {
@@ -53,7 +54,8 @@ public class MyWebSocketHandler {
   /**
    * On error.
    *
-   * @param thrown the thrown
+   * @param thrown
+   *          the thrown
    */
   @OnWebSocketError
   public void onError(Throwable thrown) {
@@ -63,7 +65,8 @@ public class MyWebSocketHandler {
   /**
    * Function that declares what happens when something connects to the socket.
    * 
-   * @param session Parameter given by the socket class, not given by code.
+   * @param session
+   *          Parameter given by the socket class, not given by code.
    */
   @OnWebSocketConnect
   public void onConnect(Session session) {
@@ -77,10 +80,12 @@ public class MyWebSocketHandler {
   }
 
   /**
-   * Function that declares what to answer to the client whenever the socket receives a message.
+   * Function that declares what to answer to the client whenever the socket
+   * receives a message.
    * 
-   * @param message Parameter given by the socket class, not given by code. Contains the message
-   *        received by the client.
+   * @param message
+   *          Parameter given by the socket class, not given by code. Contains
+   *          the message received by the client.
    * @throws IOException
    * @throws IllegalArgumentException
    */
@@ -90,52 +95,60 @@ public class MyWebSocketHandler {
     System.out.println("Message: " + message);
     if (type.equals("mp4") || type.equals("avi")) {
       videoRoute = message;
-      videos = notify(videoRoute, groundTruth);
+      metrics = notify(videoRoute, groundTruth);
       System.out.println("Histogramas creados en localhost");
-      sendFiles(videos);
+      sendMetrics(metrics);
     } else {
       groundTruth = message;
     }
   }
 
   /**
-   * Function that sends the files related to the routes passed as parameters to the current client.
+   * Function that sends accuracy metrics given as a result of running the
+   * system. Function that sends the files related to the routes passed as
+   * parameters to the current client.
    *
-   * @param videos FIle routes to the videos or scenes. Must contain valid local routes.
+   * @param metrics
+   *          Values of the metrics returned by the system.
    */
-  private void sendFiles(ArrayList<String> videos) {
-    for (String file : videos) {
-      try {
-        session.getRemote().sendString(file);
-      } catch (IOException exception) {
-        exception.printStackTrace();
-      }
+  private void sendMetrics(String metrics) {
+    System.out.println("test");
+    System.out.println(metrics);
+    try {
+      session.getRemote().sendString(metrics);
+    } catch (IOException exception) {
+      exception.printStackTrace();
     }
   }
 
   /**
-   * Function activated when some client sends a request with two string parameters. The purpose of
-   * this request is to activate the main flow of the automatic video segmentation.
+   * Function activated when some client sends a request with two string
+   * parameters. The purpose of this request is to activate the main flow of the
+   * automatic video segmentation.
    *
-   * @param videoRoute A string containing the local file route to the video to be segmented. This
-   *        local route must be valid and must contain a route to video avi or mp4.
-   * @param groundTruth A string containing the local file route to the csv ground truth file which
-   *        contains the position of the cuts. The ground truth file must be a four column file
-   *        containing: Initial frame of the cut in the first column Last frame of the cut in the
-   *        second column Type of the event. Not used in the segmentation nor the ground truth
-   *        comparison. Type of the cut. Not used in the segmentation nor the ground truth
-   *        comparison. The function only accepts avi or mp4 video files.
+   * @param videoRoute
+   *          A string containing the local file route to the video to be
+   *          segmented. This local route must be valid and must contain a route
+   *          to video avi or mp4.
+   * @param groundTruth
+   *          A string containing the local file route to the csv ground truth
+   *          file which contains the position of the cuts. The ground truth
+   *          file must be a four column file containing: Initial frame of the
+   *          cut in the first column Last frame of the cut in the second column
+   *          Type of the event. Not used in the segmentation nor the ground
+   *          truth comparison. Type of the cut. Not used in the segmentation
+   *          nor the ground truth comparison. The function only accepts avi or
+   *          mp4 video files.
    * 
-   * @return A collection of file routes of the scenes obtained from the segmentation.
+   * @return A collection of file routes of the scenes obtained from the
+   *         segmentation.
    * @throws IOException
    * @throws IllegalArgumentException
    */
-  private ArrayList<String> notify(String videoRoute, String groundTruth)
-      throws IllegalArgumentException, IOException {
-    observer.startMainflow(videoRoute, groundTruth);
-    return null;
-    // return observer.startMainflow(videoRoute, groundTruth);
-    // return new ArrayList<String>(Arrays.asList("assets/temp/Dissolve1-15.mp4",
-    // "assets/temp/Dissolve1-15.mp4", "assets/temp/Dissolve1-15.mp4"));
+  private String notify(String videoRoute, String groundTruth) throws IllegalArgumentException, IOException {
+    // observer.startMainflow(videoRoute, groundTruth);
+    // return null;
+    return observer.startMainflow(videoRoute, groundTruth);
+    // return "13, 14";
   }
 }

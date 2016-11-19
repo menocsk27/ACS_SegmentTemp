@@ -15,10 +15,13 @@ import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
  */
 public class WebSocketTest {
   /**
-   * Main that the server should run to allow the web application to communicate with it.
+   * Main that the server should run to allow the web application to communicate
+   * with it.
    * 
-   * @param args Default main arguments.
-   * @throws Exception Can throw exceptions because of socket connections.
+   * @param args
+   *          Default main arguments.
+   * @throws Exception
+   *           Can throw exceptions because of socket connections.
    */
   public static void main(String[] args) throws Exception {
     Server server = new Server(9090);
