@@ -9,7 +9,10 @@ import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
-
+/*
+ * Prueba que se ejecute el sistema desde la aplicacion web y que, despues de la
+ * ejecucion, la pagina web muestre la opcion de descargar el video de output.
+ */
 public class TestDownloadIcon {
   private WebDriver driver;
   private String baseUrl;

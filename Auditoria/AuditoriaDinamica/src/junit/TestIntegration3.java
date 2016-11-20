@@ -10,7 +10,14 @@ import org.junit.Test;
 import org.opencv.core.Core;
 
 public class TestIntegration3 {
-
+  /*
+   * Preuba la integracion entre FutbolFileManager, FootballVideo y funciones de Opencv
+   * por medio del constructor de FootballVideo, el cual llama funciones de Opencv para
+   * settear algunos de sus datos.
+   * Las pruebas se realizan con cut1_360.mp4, consisten en crear un FootballVideo a partir
+   * de ese archivo, y se espera que el resultado tenga los datos de ese archivo, los cuales
+   * son: alto 360, ancho 640, frames por segundo (fps) 25, cantFrames 155.
+   */
   @Test
   public void test() {
     int fps = 25;
@@ -21,13 +28,13 @@ public class TestIntegration3 {
     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     FutbolFileManager manager = new FutbolFileManager();
     File file = manager.open("cut1_360.mp4");
-    FootballVideo fv = new FootballVideo(file);
+    FootballVideo footballVideo = new FootballVideo(file);
     
     try{
-      assertEquals(fv.getFps(), fps);
-      assertEquals(fv.getAlto(), alto);
-      assertEquals(fv.getAncho(), ancho);
-      assertEquals(fv.getCantFrames(), cantFrames);
+      assertEquals(footballVideo.getFps(), fps);
+      assertEquals(footballVideo.getAlto(), alto);
+      assertEquals(footballVideo.getAncho(), ancho);
+      assertEquals(footballVideo.getCantFrames(), cantFrames);
     }catch(Exception e){
       e.printStackTrace();
     }
