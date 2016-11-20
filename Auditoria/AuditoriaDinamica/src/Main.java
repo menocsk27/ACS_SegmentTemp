@@ -45,7 +45,8 @@ public class Main {
     }
     */
     
-    //
+    /*
+    //Integarcion2
     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     byte[] data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     Mat mat = new Mat(3,3,1);
@@ -56,6 +57,15 @@ public class Main {
         System.out.print(mat.get(i, j)[0] + " ");
       }
     }
+    */
+    
+    
+    //Integracion3
+    System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    FutbolFileManager manager = new FutbolFileManager();
+    File file = manager.open("cut1_360.mp4");
+    FootballVideo fv = new FootballVideo(file);
+    System.out.println(fv.getAlto() + " " + fv.getAncho() + " " + fv.getCantFrames() + " " + fv.getFps());
   }
 
 }

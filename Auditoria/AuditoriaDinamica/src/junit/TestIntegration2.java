@@ -27,7 +27,7 @@ public class TestIntegration2 {
     mat.put(0, 0, data);
     try{
       proc = new ProcesadorVideoFutbol(file);
-      mat2 = proc.convertirMat(frame);
+      mat2 = proc.convertirMat(frame);/////
       for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
           assertEquals(mat.get(i, j)[0], mat2.get(i, j)[0], 0);

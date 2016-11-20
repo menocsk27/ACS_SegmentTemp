@@ -21,7 +21,7 @@ public class FootballVideo extends AbstractVideo {
    * 
    * @param data es un File que se asigana al atributo video.
    */
-  public FootballVideo(File data) {
+  public FootballVideo(File data) {/////
     super(data);
     video = new VideoCapture();
     video.open(data.getAbsolutePath());
@@ -32,7 +32,7 @@ public class FootballVideo extends AbstractVideo {
     // duracion = fps / cantFrames;
   }
 
-  @Override/////////////////////////////
+  @Override/////////////////////////////DONE
   public AbstractFrame obtenerCuadro() {
     Mat res = new Mat();
     video.read(res);

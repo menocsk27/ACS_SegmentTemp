@@ -23,7 +23,7 @@ public class TestIntegration1 {
     File file = fileManager.open("cut1_360.mp4");
     
     FootballVideo video = new FootballVideo(file);
-    AbstractFrame frame = video.obtenerCuadro();
+    AbstractFrame frame = video.obtenerCuadro();///
     try{
       assertEquals(frame.getAlto(), alto);
       assertEquals(frame.getAncho(), ancho);
