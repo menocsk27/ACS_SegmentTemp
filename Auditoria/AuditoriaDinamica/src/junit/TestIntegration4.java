@@ -10,7 +10,7 @@ import org.opencv.core.Mat;
 
 public class TestIntegration4 {
   /*
-   * Prueba la integracion entre ProcesadorImagenesFutbol y AbstractFrame y FutbolFrame
+   * Prueba la integracion entre ProcesadorImagenesFutbol/AbstractProcesadorImagenes y FutbolFrame/AbstractFrame
    * por medio de la funcion convertirAbstractFrame de ProcesadorImagenesFutbol.
    * Las pruebas se realizan a partir de un frame creado por la funcion, el cual se espera
    * que tenga los mismos datos que los usados originalmente para su creacion, los cuales

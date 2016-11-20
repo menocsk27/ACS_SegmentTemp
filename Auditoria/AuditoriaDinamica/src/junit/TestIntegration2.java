@@ -12,7 +12,7 @@ import org.opencv.core.Mat;
 
 public class TestIntegration2 {
   /*
-   * Prueba la integracion entre FutbolFileManager, FutbolFrame/AbstractFrame
+   * Prueba la integracion entre FutbolFileManager/AbstractFileManager, FutbolFrame/AbstractFrame
    * y ProcesadorVideoFutbol por medio de la funcion convertirMat de ProcesadorVideoFutbol.
    * Las pruebas que se realizan se basan en crear un Mat a partir de convertirMat (mat2) y esta
    * se compara, dato por dato, con un Mat con los mismos datos hecha manualmente (mat1). Los

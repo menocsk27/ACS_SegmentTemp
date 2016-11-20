@@ -11,8 +11,9 @@ import org.opencv.core.Core;
 
 public class TestIntegration1 {
   /*
-   * Prueba la integracion entre FutbolFileManager, FootballVideo, y AbstractFrame
-   * por medio de la funcion obtenerCuadro, la cual pertenece a FootballVideo.
+   * Prueba la integracion entre FutbolFileManager/AbstractFileManager, FootballVideo/AbstractVideo,
+   * y FutbolFrame/AbstractFrame por medio de la funcion obtenerCuadro, la cual pertenece 
+   * a FootballVideo.
    * Las pruebas que hace son para verificar que el frame que se consigue al llamar
    * obtenerCuadro tengan los datos esperados de un frame cualquiera del video
    * cut1_360.mp4, los cuales son: ancho 640, alto: 360, tipo: 16.
