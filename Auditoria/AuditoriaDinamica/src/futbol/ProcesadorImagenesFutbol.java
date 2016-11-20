@@ -102,7 +102,7 @@ public class ProcesadorImagenesFutbol extends AbstractProcesadorImagenes {
    * @return Mat de OpenCv binario, donde cada pixel resultado sea positivo indica que había un
    *         pixel verde aceptado.
    */
-  private Mat obtenerMascara(Mat imagenHsv, int sensibilidad) {
+  public Mat obtenerMascara(Mat imagenHsv, int sensibilidad) {
     Mat res = new Mat(imagenHsv.rows(), imagenHsv.cols(), imagenHsv.type());
     Scalar limiteInferior = new Scalar(60 - sensibilidad, 0, 0); // limite superior de mascara
     Scalar limiteSuperior = new Scalar(60 + sensibilidad, 255, 255);;// limite inferior de mascara
@@ -177,7 +177,7 @@ public class ProcesadorImagenesFutbol extends AbstractProcesadorImagenes {
    * @return un Mat de OpenCV con su contenido umbralizada, tipo HSV.
    * @see http://docs.opencv.org/2.4/doc/tutorials/imgproc/threshold/threshold.html
    */
-  private Mat umbralizarImagen(Mat imagenHsv) {
+  public Mat umbralizarImagen(Mat imagenHsv) {
     Imgproc.threshold(imagenHsv, imagenHsv, 0, 255, Imgproc.THRESH_TRIANGLE);
     return imagenHsv;
   }
@@ -197,7 +197,7 @@ public class ProcesadorImagenesFutbol extends AbstractProcesadorImagenes {
    * @see Vease https://es.wikipedia.org/wiki/Varianza#Variable_aleatoria
    * @see http://docs.opencv.org/2.4/modules/imgproc/doc/filtering.html?highlight=blur
    */
-  private Mat obtenerVarianza(Mat imagenHsv, int tamañoFiltro) {
+  public Mat obtenerVarianza(Mat imagenHsv, int tamañoFiltro) {
     int filas = imagenHsv.rows();
     int columnas = imagenHsv.cols();
     int tipo = CvType.CV_16UC1;
@@ -228,7 +228,7 @@ public class ProcesadorImagenesFutbol extends AbstractProcesadorImagenes {
    * @return Mat de OpenCv con los datos normalizados de la imagen inicial, tipo HSV.
    * @see http://docs.opencv.org/java/2.4.2/org/opencv/core/Core.html
    */
-  private Mat normalizar(Mat imagenHsv) {
+  public Mat normalizar(Mat imagenHsv) {
     int filas = imagenHsv.rows();
     int columnas = imagenHsv.cols();
     Mat resultado = new Mat(filas, columnas, imagenHsv.type());
