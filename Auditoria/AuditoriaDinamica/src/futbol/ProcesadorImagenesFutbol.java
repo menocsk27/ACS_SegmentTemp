@@ -271,7 +271,7 @@ public class ProcesadorImagenesFutbol extends AbstractProcesadorImagenes {
    * @param imagen imagen Mat de OpenCv a convertir, tipo HSV.
    * @return una nueva imagen tipo AbstractFrame.
    */
-  private AbstractFrame convertirAbstractFrame(Mat imagen) {
+  public AbstractFrame convertirAbstractFrame(Mat imagen) {
     int tamaño = (int) (imagen.rows() * imagen.cols() * imagen.elemSize());
     byte[] buffer = new byte[tamaño];
     imagen.get(0, 0, buffer);
