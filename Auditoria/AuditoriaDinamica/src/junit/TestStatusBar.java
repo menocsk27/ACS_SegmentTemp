@@ -9,7 +9,10 @@ import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
-
+/*
+ * Prueba que se ejecute el sistema desde la aplicacion web y que, durante o despues de la
+ * ejecucion, la pagina web muestre una barra de status para saber el progreso de la ejecucion.
+ */
 public class TestStatusBar {
   private WebDriver driver;
   private String baseUrl;
