@@ -94,12 +94,13 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
           if (gtstr != "") {
             var res = gtstr.split(",");
 
-            document.getElementById("results").innerHTML += '<div class="ui label"><i class="check circle icon"></i><label class="pf">Positive Falses</label><br></div><label class="pfr" id="pfr">' + res[0] + '</label><br>   <div class="ui label"><i class="remove circle icon"></i><label class="nf">Negative Falses</label><br></div><label class="nfr" id="nfr">' + res[1] + '</label><br>';
+            //document.getElementById("results").innerHTML += '<div class="ui label"><i class="check circle icon"></i><label class="pf">Positive Falses</label><br></div><label class="pfr" id="pfr">' + res[0] + '</label><br>   <div class="ui label"><i class="remove circle icon"></i><label class="nf">Negative Falses</label><br></div><label class="nfr" id="nfr">' + res[1] + '</label><br>';
 
             document.getElementById("pfr").innerHTML = res[0];
             document.getElementById("nfr").innerHTML = res[1];
       
             $scope.showResultsBoolean = true;
+            $scope.$apply();  
           }
           //Aqui se mandaria la direccion con los nuevos videos.
           //alert("Mensaje recibido: " + msg_recibido);
