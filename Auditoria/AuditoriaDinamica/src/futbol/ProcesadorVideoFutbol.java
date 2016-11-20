@@ -89,7 +89,7 @@ public class ProcesadorVideoFutbol extends AbstractProcesadorVideo {
    * @param imagen, AbstractFrame a ser validado.
    * @return un valor boolean. True si la imagen no es vacida. False la imagen es vacida.
    */
-  private boolean esValida(AbstractFrame imagen) {
+  public boolean esValida(AbstractFrame imagen) {
     return imagen.getDatos().length > 0;
   }
 

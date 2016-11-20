@@ -219,6 +219,7 @@ public class falseValuesProcessor implements PrecisionAnalyzer {
       } else if (cutsObtained.get(i) == false && areWeInsideACut == true) {
 
         areWeInsideACut = false;
+        counterLastFrame = i;
         cutsRanges.add(new Pair<Integer, Integer>(counterInitialFrame + 1, counterLastFrame + 1));
         continue;
       } else if (cutsObtained.get(i) == true && areWeInsideACut == true) {

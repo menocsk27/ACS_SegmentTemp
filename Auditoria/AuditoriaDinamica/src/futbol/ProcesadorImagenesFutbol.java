@@ -84,7 +84,7 @@ public class ProcesadorImagenesFutbol extends AbstractProcesadorImagenes {
    * @param imagenBgr Mat de OpenCv por ser convertida a HSV, tipo BGR.
    * @return imagen tipo Mat de OpenCv convertida a Hsv de tres canales.
    */
-  private Mat convertirHsv(Mat imagenBgr) {
+  public Mat convertirHsv(Mat imagenBgr) {
     Mat resultado = new Mat(imagenBgr.rows(), imagenBgr.cols(), imagenBgr.type());
     Imgproc.cvtColor(imagenBgr, resultado, Imgproc.COLOR_BGR2HSV);
     return resultado;
@@ -242,7 +242,7 @@ public class ProcesadorImagenesFutbol extends AbstractProcesadorImagenes {
    * @param imagenHsv Mat de OpenCv con la imagen a obtener el hue, tipo HSV.
    * @return Mat de OpenCv con el Hue de la imagen inicial, tipo HSV.
    */
-  private Mat obtenerHue(Mat imagenHsv) {
+  public Mat obtenerHue(Mat imagenHsv) {
     int tipoCv = imagenHsv.type();
     Mat resultado = new Mat(imagenHsv.rows(), imagenHsv.cols(), imagenHsv.type());
     ArrayList<Mat> canalesHsv = new ArrayList<Mat>();
@@ -258,7 +258,7 @@ public class ProcesadorImagenesFutbol extends AbstractProcesadorImagenes {
    * @param imagen AbstractFrame a convertir.
    * @return una nueva imagen tipo Mat de OpenCv, tipo HSV.
    */
-  private Mat convertirMat(AbstractFrame imagen) {
+  public Mat convertirMat(AbstractFrame imagen) {
     byte[] datos = imagen.getDatos();
     Mat resultado = new Mat(imagen.getAlto(), imagen.getAncho(), imagen.getTipo());
     resultado.put(0, 0, datos);
