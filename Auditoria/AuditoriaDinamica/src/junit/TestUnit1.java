@@ -37,12 +37,12 @@ public class TestUnit1 {
    */
   
   private static LinkedList<Double> parameter;
-  private static AbstractProcesadorVideo videoProcesador;
+  private static ProcesadorVideoFutbol videoProcesador;
   private static int tiempoProcesamiento;
   private static int framesProcesados;
   private static AbstractVideo video;
   private static AbstractFileManager fileManager;
-  private static AbstractProcesadorImagenes procesadorImagenes;
+  private static ProcesadorImagenesFutbol procesadorImagenes;
   
   private static LinkedList<Double> createLinkedlist(int[] listValues) {
     LinkedList<Double> list = new LinkedList<Double>();
@@ -55,64 +55,134 @@ public class TestUnit1 {
   @BeforeClass
   public static void beforeTests(){
     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    FutbolFileManager TestfileManager = new FutbolFileManager();
+    
+    TestUnit1.tiempoProcesamiento = TestUnit1.framesProcesados = 0;
+    TestUnit1.fileManager = new FutbolFileManager();
+    
+    TestUnit1.procesadorImagenes = new ProcesadorImagenesFutbol();
+    
   }
 
   @Before
   public  void beforeTest(){
-    FutbolFileManager fileManager = new FutbolFileManager();
-    File file = fileManager.open("cut1_360.mp4");
-    tiempoProcesamiento = framesProcesados = 0;
-    fileManager = new FutbolFileManager();
-    procesadorImagenes = new ProcesadorImagenesFutbol();
-    video = new FootballVideo(file);
+    File file = TestUnit1.fileManager.open("cut1_360.mp4");
+    TestUnit1.video = new FootballVideo(file);
+    TestUnit1.videoProcesador = new ProcesadorVideoFutbol(file);
   }
 
  
 
 
-  /**
-   * Parameters to test. These parameters are different sets of decimal values and their expected
-   * average and standard deviation, respectively.
-   *
-   * @return the collection
-   */
-  @Parameterized.Parameters
-  public static Collection parametersToTest() {
-    LinkedList<Double> parametro1 = new LinkedList<Double>();
-    int[] paramTest1 = {4, 2, 5, 7, 32, 23, 11, 5, 16, 23};
-    parametro1 = createLinkedlist(paramTest1);
-    double stdDevC = 9.693296;
-    double avgC = 12.8;
 
-    LinkedList<Double> parametro2 = new LinkedList<Double>();
-    int[] paramTest2 = {4, 2, 5, 7, 12, 2, 11, 7, 16, 23, 30};
-    parametro2 = createLinkedlist(paramTest2);
-    double stdDevD = 8.5792369;
-    double avgD = 10.81818182;
-
-    LinkedList<Double> parametro3 = new LinkedList<Double>();
-    int[] paramTest3 = {1, 21, 5, 17, 41, 21, 5, 5, 10, 19, 4};
-    parametro3 = createLinkedlist(paramTest3);
-    double stdDevE = 11.2279168;
-    double avgE = 13.54545455;
-
-    return Arrays.asList(new Object[][] {{parametro1, stdDevC, avgC}, {parametro2, stdDevD, avgD},
-        {parametro3, stdDevE, avgE}});
-  }
-  
   
   @Test
-  public  void testOne(){
+  public  void testobtentionOfHueChannel(){
+    /*Se asegura que la obtención del canal de tono de cada imagen sea correcta, validando que sólo se obtenga una 
+     * matriz de un canal y que el valor de dicho canal corresponda al del tono (Hue).*/
     AbstractFrame imagen;
     int counter = 0;
     int cantFrames = video.getCantFrames();
     while (counter < cantFrames) {
       imagen = video.obtenerCuadro();
-      if (((ProcesadorVideoFutbol) videoProcesador).esValida(imagen)) {
-        Mat imagenTemp = ((ProcesadorImagenesFutbol) procesadorImagenes).convertirMat(imagen);
-        imagenTemp = ((ProcesadorImagenesFutbol) procesadorImagenes).convertirHsv(imagenTemp);
-        imagenTemp=((ProcesadorImagenesFutbol) procesadorImagenes).obtenerHue(imagenTemp);
-        assertEquals(imagenTemp.channels(), 1);
+      //System.out.println(imagen.getAncho());
+      videoProcesador.convertirMat(imagen);
+      if ( TestUnit1.videoProcesador.esValida(imagen)) {
+        Mat imagenTemp = TestUnit1.procesadorImagenes.convertirMat(imagen);
+        imagenTemp =  TestUnit1.procesadorImagenes.convertirHsv(imagenTemp);
+        double hueValue;
+        Mat imagenTemp1= TestUnit1.procesadorImagenes.obtenerHue(imagenTemp);
+        assertEquals(imagenTemp1.channels(), 1);
+        for (int i = 0; i < imagenTemp.rows(); i++){
+          for (int j = 0; j < imagenTemp.cols(); j++){
+            hueValue= imagenTemp.get(i, j)[0];
+            assertEquals(imagenTemp1.get(i, j)[0], hueValue, 0.001);
+          }
+        }
+      }
+ 
+      counter++;
+    }
+  }
+  
+  @Test
+  public  void testNormalization(){
+    /*Realiza todos los procesos hasta llegar a la normalización de la imagen. Luego se asegura que los rangos
+     * de los pixeles sean válidos.*/
+    AbstractFrame imagen;
+    int counter = 0;
+    int cantFrames = video.getCantFrames();
+    while (counter < cantFrames) {
+      imagen = video.obtenerCuadro();
+      if (((ProcesadorVideoFutbol) TestUnit1.videoProcesador).esValida(imagen)) {
+        Mat imagenTemp = ((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).convertirMat(imagen);
+        imagenTemp = ((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).convertirHsv(imagenTemp);
+        imagenTemp=((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).obtenerHue(imagenTemp);
+        imagenTemp=((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).normalizar(imagenTemp);
+        for (int i = 0; i < imagenTemp.rows(); i++){
+          for (int j = 0; j < imagenTemp.cols(); j++){
+            assertTrue(imagenTemp.get(i, j)[0] < 260.0);
+            assertTrue(imagenTemp.get(i, j)[0] >= 0.0);
+          }
+        }
+       
+      }
+ 
+      counter++;
+    }
+  }
+  
+  @Test
+  public  void testobtentionMask(){
+    /*Realiza todos los procesos necesarios hasta llegar al punto en donde
+     * la obtención de la máscara de la imagen sucede. y luego se asegura que los 
+     * valores de los pixeles sean 0 o 255.*/
+    AbstractFrame imagen;
+    int counter = 0;
+    int cantFrames = video.getCantFrames();
+    while (counter < cantFrames) {
+      imagen = video.obtenerCuadro();
+      if (((ProcesadorVideoFutbol) TestUnit1.videoProcesador).esValida(imagen)) {
+        Mat imagenTemp = ((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).convertirMat(imagen);
+        imagenTemp = ((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).convertirHsv(imagenTemp);
+        imagenTemp=((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).obtenerHue(imagenTemp);
+        imagenTemp=((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).normalizar(imagenTemp);
+        imagenTemp=((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).obtenerMascara(imagenTemp, 30);
+        for (int i = 0; i < imagenTemp.rows(); i++){
+          for (int j = 0; j < imagenTemp.cols(); j++){
+            assertTrue(imagenTemp.get(i, j)[0] == 0.0 || imagenTemp.get(i, j)[0] == 255.0);
+          }
+        }
+       
+      }
+ 
+      counter++;
+    }
+  }
+  
+  @Test
+  public  void testUmbralizationImage(){
+    /*Realiza todos los procesos necesarios hasta llegar al punto en donde
+     * la umbralización es realizada. Se asegura de que los valores de la imagen
+     * se umbralicen de 0 a 255*/
+    AbstractFrame imagen;
+    int counter = 0;
+    int cantFrames = video.getCantFrames();
+    while (counter < cantFrames) {
+      imagen = video.obtenerCuadro();
+      if (((ProcesadorVideoFutbol) TestUnit1.videoProcesador).esValida(imagen)) {
+        Mat imagenTemp = ((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).convertirMat(imagen);
+        imagenTemp = ((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).convertirHsv(imagenTemp);
+        imagenTemp=((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).obtenerHue(imagenTemp);
+        imagenTemp=((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).normalizar(imagenTemp);
+        imagenTemp=((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).obtenerVarianza(imagenTemp, 10);
+        imagenTemp=((ProcesadorImagenesFutbol) TestUnit1.procesadorImagenes).umbralizarImagen(imagenTemp);
+        for (int i = 0; i < imagenTemp.rows(); i++){
+          for (int j = 0; j < imagenTemp.cols(); j++){
+            assertTrue(imagenTemp.get(i, j)[0] == 0.0 || imagenTemp.get(i, j)[0] == 255.0);
+          }
+        }
+       
       }
  
       counter++;

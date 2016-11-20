@@ -14,7 +14,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 
-@Suite.SuiteClasses({/*TestDownloadIcon.class, TestStatusBar.class,*/ TestIntegration1.class, TestIntegration2.class, TestIntegration3.class, TestIntegration4.class, TestUnit1.class })
+@Suite.SuiteClasses({TestDownloadIcon.class, TestStatusBar.class, TestIntegration1.class, TestIntegration2.class, TestIntegration3.class, TestIntegration4.class, TestUnit1.class })
 
 public class TestJUnitClasses {
 }
