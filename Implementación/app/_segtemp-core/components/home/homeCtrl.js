@@ -9,6 +9,7 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
 
   $scope.showResultsBoolean = false; 
   $scope.msg_recibido = "";
+  $scope.showdownloadcsv = false;
 
   $scope.validFile = function(validList, extToCheck) {
     for (i in validList) {
@@ -30,6 +31,14 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
         var videoDirection = document.getElementById('selectVideoInput').value;
         var nameStart = (videoDirection.indexOf('\\') >= 0 ? videoDirection.lastIndexOf('\\') : videoDirection.lastIndexOf('/'));
         videoFile = videoDirection.substring(nameStart+1);
+
+        var video = document.getElementById('videomostrado');
+        video.innerHTML = ""; //En caso de que se suban varias versiones sólo queda la última
+        var source = document.createElement('source');
+
+        source.setAttribute('src',"assets/temp/"+file.name);
+        video.appendChild(source);
+
         sweetAlert(
             'Archivo enviado:',
             videoFile,
@@ -92,20 +101,22 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
           $scope.msg_recibido = evt.data;
           var gtstr = $scope.msg_recibido;
           if (gtstr != "") {
+
             var res = gtstr.split(",");
-
-            //document.getElementById("results").innerHTML += '<div class="ui label"><i class="check circle icon"></i><label class="pf">Positive Falses</label><br></div><label class="pfr" id="pfr">' + res[0] + '</label><br>   <div class="ui label"><i class="remove circle icon"></i><label class="nf">Negative Falses</label><br></div><label class="nfr" id="nfr">' + res[1] + '</label><br>';
-
             document.getElementById("pfr").innerHTML = res[0];
             document.getElementById("nfr").innerHTML = res[1];
-      
+            document.getElementById("downloadDivId").href = res[2];
+
             $scope.showResultsBoolean = true;
-            $scope.$apply();  
+            $scope.showdownloadcsv = true;
+
+            $scope.$apply();    
+                      
+
+            
           }
-          //Aqui se mandaria la direccion con los nuevos videos.
-          //alert("Mensaje recibido: " + msg_recibido);
-          //document.getElementById("videosDiv").innerHTML += '<video width="500" controls><source src="' + msg_recibido + '" type="video/mp4">Your browser does not support HTML5 video.</video>';
         };       
+       
         
         ws.onclose = function(){
           sweetAlert(

@@ -39,10 +39,11 @@
   <div class="ui icon infoIcon" data-position="top left" data-inverted=""> <i class="big icon info circle"></i></div>
 
   <div class="videoDiv" id="videosDiv">
-    <video  width="500" controls>
-    <source src="assets/temp/Dissolve1-15.mp4" type="video/mp4">
-    Your browser does not support HTML5 video.
-    </video>
+    <div>
+      <video  width="500" id = "videomostrado" controls>
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
   </div>
 
     <div class="gtResultsDiv" id="gtResultsDiv">
@@ -73,9 +74,8 @@
         
       </div>
     </div>
-    
 
-
+    <div class="ui icon downloadDiv"  src = "" ng-show = "showdownloadcsv"> <a id = "downloadDivId" href="" download><i class="big icon cloud download"></i></div></a>
 
   </div>
 </div>

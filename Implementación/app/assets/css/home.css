@@ -52,6 +52,12 @@ body {
   right: 1%;
 }
 
+.downloadDiv{
+  position: absolute;
+  top: 30%;
+  left: 1%;
+}
+
 .videoDiv{
   position:absolute;
   left:10%;
