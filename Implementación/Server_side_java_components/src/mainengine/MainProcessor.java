@@ -92,8 +92,7 @@ public class MainProcessor {
     // normalizado.png", 300, 300);
     LinkedList<Double> distanceArray = distanceObtainer.generateDistanceArray(histogramList);
     LinkedList<Boolean> cutsArray = cutValidator.obtainCuts(distanceArray);
-    GroundtruthReader lectorGt = new CsvGroundtruthreader();
-    LinkedList<Pair<Integer, Integer>> sceneCuts = lectorGt.getAbsolutecuts(groundTruth);
+
     PrecisionAnalyzer metricAnalyzer = new falseValuesProcessor();
     for (int i = 0; i < frames.size(); i++) {
       frames.get(i).release();
@@ -101,28 +100,31 @@ public class MainProcessor {
     for (int j = 0; j < histogramList.size(); j++) {
       histogramList.get(j).release();
     }
-    System.out
-        .println("Falsos positivos: " + metricAnalyzer.getFalsepositives(sceneCuts, cutsArray));
-    System.out
-        .println("Falsos negativos: " + metricAnalyzer.getFalsenegatives(sceneCuts, cutsArray));
 
     GroundTruthWriter gtGenerator = new CsvGroundtruthwriter();
     LinkedList<Pair<Integer, Integer>> cutsToGTfile = metricAnalyzer.getCutsScenes(cutsArray);
 
     gtGenerator.writeGroundTruth(routeGroundTruthGenerator, cutsToGTfile);
     File f1 = new File(routeGroundTruthGenerator);
-    String pathToCutsGenerated = f1.getAbsolutePath();
-
-    String metrics = metricAnalyzer.getFalsepositives(sceneCuts, cutsArray) + ", "
-        + metricAnalyzer.getFalsenegatives(sceneCuts, cutsArray) + ", "
-        + System.getProperty("user.dir") + "\\" + routeGroundTruthGenerator;
+    String pathToCutsGenerated = f1.getAbsolutePath(); // CHARLIE, AQUÍ ESTÁ EL ABSOLUTE. POR SI LO
+                                                       // QUIERE.
 
 
+    if ((!groundTruth.equals("404"))) { // No es 404, so sí se envío GT
+      GroundtruthReader lectorGt = new CsvGroundtruthreader();
+      LinkedList<Pair<Integer, Integer>> sceneCuts = lectorGt.getAbsolutecuts(groundTruth);
 
-    if (groundTruth.equals("")) {
-      return ", , " + System.getProperty("user.dir") + "\\" + pathToCutsGenerated;
-    } else {
+      System.out
+          .println("Falsos positivos: " + metricAnalyzer.getFalsepositives(sceneCuts, cutsArray));
+      System.out
+          .println("Falsos negativos: " + metricAnalyzer.getFalsenegatives(sceneCuts, cutsArray));
+
+      String metrics = metricAnalyzer.getFalsepositives(sceneCuts, cutsArray) + ", "
+          + metricAnalyzer.getFalsenegatives(sceneCuts, cutsArray) + ", "
+          + System.getProperty("user.dir") + "\\" + routeGroundTruthGenerator;
       return metrics;
+    } else { // No se envío GT.
+      return ", , " + System.getProperty("user.dir") + "\\" + routeGroundTruthGenerator;
     }
   }
 }
