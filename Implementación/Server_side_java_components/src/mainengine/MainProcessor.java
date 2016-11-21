@@ -118,10 +118,11 @@ public class MainProcessor {
     gtGenerator.writeGroundTruth(routeGroundTruthGenerator, cutsToGTfile);
 
     String metrics = metricAnalyzer.getFalsepositives(sceneCuts, cutsArray) + ", "
-        + metricAnalyzer.getFalsenegatives(sceneCuts, cutsArray);
+        + metricAnalyzer.getFalsenegatives(sceneCuts, cutsArray) + ", " + System.getProperty("user.dir") + "\\"
+        + routeGroundTruthGenerator;
 
     if (groundTruth.equals("")) {
-      return "";
+      return ", , " + System.getProperty("user.dir") + "\\" + routeGroundTruthGenerator;
     } else {
       return metrics;
     }
