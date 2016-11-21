@@ -103,9 +103,10 @@ app.controller('homeCtrl', ['$scope', '$http', 'Upload', '$timeout', '$location'
           if (gtstr != "") {
 
             var res = gtstr.split(",");
+            dir = res[2].substring(14, res[2].length)
             document.getElementById("pfr").innerHTML = res[0];
             document.getElementById("nfr").innerHTML = res[1];
-            document.getElementById("downloadDivId").href = res[2];
+            document.getElementById("downloadDivId").href = dir;
 
             $scope.showResultsBoolean = true;
             $scope.showdownloadcsv = true;
