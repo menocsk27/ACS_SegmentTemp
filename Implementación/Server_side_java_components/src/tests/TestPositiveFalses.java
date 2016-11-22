@@ -1,14 +1,20 @@
-package tests;
+package unittests;
 
-import java.util.regex.Pattern;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
-import org.junit.*;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.openqa.selenium.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class TestPositiveFalses {
   private WebDriver driver;
@@ -26,7 +32,7 @@ public class TestPositiveFalses {
   }
 
   @Test
-  public void testPositiveFalses() throws Exception {
+  public void testPositiveFalses2() throws Exception {
     driver.get(baseUrl + "/app/#/home");
     driver.findElement(By.id("selectVideoInput")).clear();
     driver.findElement(By.id("selectVideoInput")).sendKeys("C:\\Users\\Mauricio\\Desktop\\Dissolve1-15.mp4");
@@ -42,7 +48,7 @@ public class TestPositiveFalses {
     Thread.sleep(500);
     driver.findElement(By.cssSelector("button.confirm")).click();
     Thread.sleep(15000);
-    assertEquals("Positive Falses", driver.findElement(By.cssSelector("#results > div.ui.label")).getText());
+    assertEquals("Positive Falses", driver.findElement(By.cssSelector("label.pf")).getText());
   }
 
   @After

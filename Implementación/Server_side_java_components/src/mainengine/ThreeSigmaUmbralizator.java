@@ -60,7 +60,7 @@ public class ThreeSigmaUmbralizator implements UmbralizationProcessor {
     try {
       avg = calculator.calculateAverage(distanceHistArray);
       stdDev = calculator.calculateStdDeviation(distanceHistArray);
-      System.out.println("Esperanza: " + avg + "Desviación Estándar: " + stdDev);
+      // System.out.println("Esperanza: " + avg + "Desviación Estándar: " + stdDev);
       for (int i = 0; i < distanceHistArray.size(); i++) {
         if (this.isCut(avg, stdDev, distanceHistArray.get(i))) {
           isDistanceAtPosCut.add(true);
