@@ -1,4 +1,4 @@
-package unittests;
+package tests;
 
 import java.util.regex.Pattern;
 import java.io.File;
@@ -10,7 +10,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class TestPositiveFalses {
+public class TestMandarVideo {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -26,23 +26,11 @@ public class TestPositiveFalses {
   }
 
   @Test
-  public void testPositiveFalses() throws Exception {
+  public void testMandarVideo() throws Exception {
     driver.get(baseUrl + "/app/#/home");
     driver.findElement(By.id("selectVideoInput")).clear();
-    driver.findElement(By.id("selectVideoInput")).sendKeys("C:\\Users\\Mauricio\\Desktop\\Dissolve1-15.mp4");
-    Thread.sleep(500);
-    driver.findElement(By.cssSelector("button.confirm")).click();
-    Thread.sleep(300);
-    driver.findElement(By.id("selectGroundTruth")).clear();
-    driver.findElement(By.id("selectGroundTruth")).sendKeys("C:\\Users\\Mauricio\\Desktop\\groundtruth.csv");
-    Thread.sleep(500);
-    driver.findElement(By.cssSelector("button.confirm")).click();
-    Thread.sleep(300);
-    driver.findElement(By.xpath("//div[@id='start']/i")).click();
-    Thread.sleep(500);
-    driver.findElement(By.cssSelector("button.confirm")).click();
-    Thread.sleep(15000);
-    assertEquals("Positive Falses", driver.findElement(By.cssSelector("#results > div.ui.label")).getText());
+    driver.findElement(By.id("selectVideoInput")).sendKeys("C:\\Users\\Mauricio\\Desktop\\cut1_360.mp4");
+    assertEquals("Archivo enviado:", driver.findElement(By.cssSelector("h2")).getText());
   }
 
   @After

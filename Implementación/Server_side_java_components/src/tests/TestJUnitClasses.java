@@ -3,7 +3,7 @@
  * 
  * @version 0.1.0
  */
-package unittests;
+package tests;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

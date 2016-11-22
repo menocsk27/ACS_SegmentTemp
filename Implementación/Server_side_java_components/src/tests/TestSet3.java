@@ -3,7 +3,7 @@
  * 
  * @version 0.1.0
  */
-package unittests;
+package tests;
 
 
 import java.io.IOException;
@@ -28,6 +28,9 @@ public class TestSet3 {
 
   /** The csv route. */
   private String fileRoute;
+
+  /** Expected result of reading */
+  private boolean expectedResult;
 
   /** The test junit test. */
   private static GroundtruthReader reader = new CsvGroundtruthreader();
@@ -55,8 +58,9 @@ public class TestSet3 {
    *
    * @param fileRoute The file route of the csv ground truth
    */
-  public TestSet3(String fileRoute) {
+  public TestSet3(String fileRoute, boolean expectedResult) {
     this.fileRoute = fileRoute;
+    this.expectedResult = expectedResult;
   }
 
 
@@ -68,7 +72,8 @@ public class TestSet3 {
    */
   @Parameterized.Parameters
   public static Collection parametersToTest() {
-    return Arrays.asList(new Object[][] {{"groundtruth1.csv"}, {"groundtruth.csv"}});
+    return Arrays.asList(new Object[][] {{"groundtruth1.csv", true}, {"groundtruth.csv", true},
+        {"videoNoExistente.mp4", false}});
   }
 
 
@@ -78,7 +83,7 @@ public class TestSet3 {
    */
   @Test
   public void validateCorrectReadingOfCSVFiles() {
-    Assert.assertEquals(true, readLinesOfCSV(this.fileRoute));
+    Assert.assertEquals(this.expectedResult, readLinesOfCSV(this.fileRoute));
   }
 
 
