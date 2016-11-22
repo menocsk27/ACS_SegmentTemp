@@ -14,7 +14,9 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 
-@Suite.SuiteClasses({TestSet1.class, TestSet2.class, TestSet3.class})
+@Suite.SuiteClasses({TestSet1.class, TestSet2.class, TestSet3.class, TestIntegration1.class,
+    TestIntegration2.class, TestIntegration3.class, TestIntegration4.class, TestMandarVideo.class,
+    TestPositiveFalses.class})
 
 public class TestJUnitClasses {
 }

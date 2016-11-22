@@ -5,17 +5,13 @@
  */
 package mainengine;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.core.Size;
-import org.opencv.highgui.Highgui;
 import org.opencv.highgui.VideoCapture;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
 
 
@@ -75,6 +71,7 @@ public class VideoSegmenter {
    * 
    * @param reader The reader of the video sent to the system to be segmented.
    */
+
   private void setVideoproperties(VideoCapture reader) {
     widthLastVideoRead = reader.get(widthVideoCode);
     heightLastVideoRead = reader.get(heighVideoCode);
@@ -85,6 +82,7 @@ public class VideoSegmenter {
       fpsLastVideoRead = 24;
     }
   }
+
 
   /**
    * Instantiates a new video segmenter.
@@ -137,23 +135,17 @@ public class VideoSegmenter {
    * @param filename The name of the file, including its extension (.avi preferred).
    */
 
-  public void createVideofromframes(LinkedList<Mat> frames, String filename) {
-    VideoWriter writer;
-    Highgui.imwrite("imagen.jpg", frames.get(0));
-    System.out.println("Frame size: " + frames.get(0).width() + frames.get(0).height());
-    System.loadLibrary("opencv_java310");
-    VideoWriter.fourcc('I', 'Y', 'U', 'V');
-    Size resolution =
-        new Size(VideoSegmenter.widthLastVideoRead, VideoSegmenter.heightLastVideoRead);
-    writer = new VideoWriter(filename, -1, VideoSegmenter.fpsLastVideoRead, resolution, true);
-
-    int counterFrames = 0;
-    while (writer.isOpened() && counterFrames < frames.size()) {
-      writer.write(frames.get(counterFrames));
-      counterFrames++;
-    }
-    writer.release();
-  }
+  /*
+   * public void createVideofromframes(LinkedList<Mat> frames, String filename) { VideoWriter
+   * writer; Highgui.imwrite("imagen.jpg", frames.get(0)); System.out.println("Frame size: " +
+   * frames.get(0).width() + frames.get(0).height()); System.loadLibrary("opencv_java310");
+   * VideoWriter.fourcc('I', 'Y', 'U', 'V'); Size resolution = new
+   * Size(VideoSegmenter.widthLastVideoRead, VideoSegmenter.heightLastVideoRead); writer = new
+   * VideoWriter(filename, -1, VideoSegmenter.fpsLastVideoRead, resolution, true);
+   * 
+   * int counterFrames = 0; while (writer.isOpened() && counterFrames < frames.size()) {
+   * writer.write(frames.get(counterFrames)); counterFrames++; } writer.release(); }
+   */
 
   /**
    * Obtains the array of scenes (array of frames) based on the position of each cut. The cutPos
@@ -197,20 +189,15 @@ public class VideoSegmenter {
    * @param cutsPos It has len = frames.len() -1 . Array of cuts between frame t and frame t+1.
    * @return Array of scenes (array of frames).
    */
-  public LinkedList<String> createScenes(LinkedList<Mat> frames, LinkedList<Boolean> cutsPos) {
-    LinkedList<String> routeOfvideos = new LinkedList<String>();
-    LinkedList<LinkedList<Mat>> scenesGenerated = this.obtainScenes(frames, cutsPos);
-    String baseFilename = "Escena";
-    String currentFilename;
-    for (int i = 0; i < scenesGenerated.size(); i++) {
-      currentFilename = baseFilename;
-      currentFilename += i + ".avi";
-      this.createVideofromframes(scenesGenerated.get(i), currentFilename);
-      File localRoute = new File(currentFilename);
-      routeOfvideos.add(localRoute.getAbsolutePath());
-    }
-    return routeOfvideos;
-  }
+  /*
+   * LinkedList<String> createScenes(LinkedList<Mat> frames, LinkedList<Boolean> cutsPos) {
+   * LinkedList<String> routeOfvideos = new LinkedList<String>(); LinkedList<LinkedList<Mat>>
+   * scenesGenerated = this.obtainScenes(frames, cutsPos); String baseFilename = "Escena"; String
+   * currentFilename; for (int i = 0; i < scenesGenerated.size(); i++) { currentFilename =
+   * baseFilename; currentFilename += i + ".avi"; this.createVideofromframes(scenesGenerated.get(i),
+   * currentFilename); File localRoute = new File(currentFilename);
+   * routeOfvideos.add(localRoute.getAbsolutePath()); } return routeOfvideos; }
+   */
 
 
 

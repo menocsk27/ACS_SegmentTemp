@@ -9,6 +9,7 @@ import java.util.LinkedList;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -19,6 +20,7 @@ import mainengine.NumericalDataCalculator;
 import mainengine.StadisticalCalculator;
 import mainengine.VideoSegmenter;
 
+@RunWith(Parameterized.class)
 public class TestIntegration4 {
 
 

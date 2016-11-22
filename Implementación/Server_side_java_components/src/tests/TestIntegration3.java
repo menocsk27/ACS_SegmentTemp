@@ -78,8 +78,7 @@ public class TestIntegration3 {
     // Obtengo los histogramas de la capa H de cada frame
     LinkedList<Mat> histogramList = histProc.calculateHistoOfHueVideo(this.framesObtained);
     for (int i = 0; i < histogramList.size(); i++) {
-      assertEquals(histogramList.get(i).size().area(), this.framesObtained.get(i).size().area(),
-          0.02);
+      assertEquals(histogramList.get(i).size().area(), 256.0, 0.02);
       histogramList.get(i).release();
       this.framesObtained.get(i).release();
     }

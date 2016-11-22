@@ -82,6 +82,9 @@ public class TestSet1 {
       int heightFrame = frames.get(1).rows();
       Assert.assertEquals(resVideo.get(0), widthFrame, 0.1);
       Assert.assertEquals(resVideo.get(1), heightFrame, 0.1);
+      for (int i = 0; i < frames.size(); i++) {
+        frames.get(i).release();
+      }
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

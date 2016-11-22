@@ -160,8 +160,10 @@ public class falseValuesProcessor implements PrecisionAnalyzer {
     int numberFrames = cutsObtained.size() + 1;
     LinkedList<Integer> cutsGt = this.obtainFramesCuts(gTsceneCuts);
     LinkedList<Integer> cutsObtainedFromSegTemp = this.getCutsobtained(cutsObtained);
-    System.out.println("CortesGT:" + cutsGt.toString());
-    System.out.println("CortesAnalyzer:" + cutsObtainedFromSegTemp.toString());
+    /*
+     * System.out.println("CortesGT:" + cutsGt.toString()); System.out.println("CortesAnalyzer:" +
+     * cutsObtainedFromSegTemp.toString());
+     */
     for (int i = 0; i < cutsObtainedFromSegTemp.size(); i++) {
       if (this.ismatch(cutsGt, cutsObtainedFromSegTemp.get(i), numberFrames)) {
 
@@ -185,10 +187,11 @@ public class falseValuesProcessor implements PrecisionAnalyzer {
     int numberFrames = cutsObtained.size() + 1;
     LinkedList<Integer> notCutsGt = this.obtainFramesNotCuts(gTsceneCuts, numberFrames);
     LinkedList<Integer> notCutsObtainedFromSegTemp = this.getNotcutsobtained(cutsObtained);
-    System.out.println("NotCortesGT:" + notCutsGt.toString());
-    System.out.println("x");
-    System.out.println("NotCortesObtained:" + notCutsObtainedFromSegTemp.get(45));
-    System.out.println("Número de negativos obtenidos:  " + notCutsObtainedFromSegTemp.size());
+    /*
+     * System.out.println("NotCortesGT:" + notCutsGt.toString()); System.out.println("x");
+     * System.out.println("NotCortesObtained:" + notCutsObtainedFromSegTemp.get(45));
+     * System.out.println("Número de negativos obtenidos:  " + notCutsObtainedFromSegTemp.size());
+     */
     for (int i = 0; i < notCutsObtainedFromSegTemp.size(); i++) {
 
       if (this.ismatch(notCutsGt, notCutsObtainedFromSegTemp.get(i), numberFrames)) {
@@ -234,7 +237,7 @@ public class falseValuesProcessor implements PrecisionAnalyzer {
 
       }
     }
-    System.out.println("Cortes añadidos: " + cutsRanges.size());
+    // System.out.println("Cortes añadidos: " + cutsRanges.size());
     return cutsRanges;
   }
 }

@@ -62,7 +62,7 @@ public class BhattacharyyaHandler implements DistanceHistogramGenerator {
       hist1Values.add(hist1.get(bin, 0)[0]);
     }
     for (int bin = 0; bin < 256; bin++) {
-      hist2Values.add(hist2.get(bin, 0)[0]);
+      hist2Values.add(hist1.get(bin, 0)[0]);
     }
 
     double denom; // denominador de la división

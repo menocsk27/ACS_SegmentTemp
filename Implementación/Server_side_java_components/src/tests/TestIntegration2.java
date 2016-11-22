@@ -92,7 +92,7 @@ public class TestIntegration2 {
 
 
 
-  @Test(expected = IOException.class)
+  @Test
   public void testUmbralizator() {
     double avg = calculator.calculateAverage(valuesGeneratedByBhattacharyya);
     double stdDev = calculator.calculateStdDeviation(valuesGeneratedByBhattacharyya);
