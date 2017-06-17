@@ -8,7 +8,7 @@ public class MainProgramTemp {
     // TODO Auto-generated method stub
 
     String videoRoute = "Dissolve1-15.mp4";
-    String groundTruth = "groundtruth.csv";
+    String groundTruth = "otro.csv";
     MainProcessor programaPrincipal = new MainProcessor();
     try {
       programaPrincipal.startMainflow(videoRoute, groundTruth);
